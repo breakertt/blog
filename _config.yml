@@ -39,10 +39,12 @@ post_asset_folder: false
 relative_link: false
 future: true
 highlight:
-  enable: false
-  line_number: true
+  enable: true
+  line_number: false
   auto_detect: false
   tab_replace:
+
+# Prism
 prism_plugin:
   mode: 'preprocess'    # realtime/preprocess
   theme: 'default'
@@ -77,7 +79,19 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: suka
+
+# Suka Theme config
+# Documents: https://theme-suka.skk.moe/docs/
+suka_theme:
+  search:
+    enable: true
+    path: search.json
+    field: post # Page | Post | All. Default post
+  prism:
+    enable: false
+    line_number: true
+    theme: default
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -89,8 +103,3 @@ deploy:
 # Aplayer
 aplayer:
   meting: true
-
-# Search
-search:
-    path: search.xml
-    field: all
