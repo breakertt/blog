@@ -1,103 +1,397 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
-  
-  <title>FaceNet使用记录 - 我的人脸识别学习笔记02 | Breakertt Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="即使是用别人的东西也花了好大的气力。">
-<meta name="keywords" content="人脸识别,计算机视觉,Python">
-<meta property="og:type" content="article">
-<meta property="og:title" content="FaceNet使用记录 - 我的人脸识别学习笔记02">
-<meta property="og:url" content="https://breakertt.moe/2018/06/19/face_recognition_02/index.html">
-<meta property="og:site_name" content="Breakertt Blog">
-<meta property="og:description" content="即使是用别人的东西也花了好大的气力。">
-<meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png">
-<meta property="og:updated_time" content="2020-03-14T01:52:36.555Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FaceNet使用记录 - 我的人脸识别学习笔记02">
-<meta name="twitter:description" content="即使是用别人的东西也花了好大的气力。">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Breakertt Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
-    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-  
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>FaceNet使用记录 - 我的人脸识别学习笔记02 | Breakertt Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/ico" href="/img/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png"><link rel="icon" typt="image/png" sizes="192x192" href="/img/favicon/android-chrome-192x192.png"><link rel="icon" typt="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png"><link rel="icon" typt="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"><link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/atom-one-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/atom-one-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Breakertt Blog"><meta name="msapplication-starturl" content="https://breakertt.moe"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Breakertt Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="FaceNet使用记录 - 我的人脸识别学习笔记02 | Breakertt Blog"><meta property="og:site_name" content="Breakertt Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://breakertt.moe/2018/06/19/face_recognition_02/"><meta property="og:locale" content="zh-CN"><meta name="description" content="即使是用别人的东西也花了好大的气力。 - Breakertt - Breakertt Blog"><meta name="keywords" content="人脸识别, 计算机视觉, Python"><meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000042.png"><meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png"><meta property="article:published_time" content="2018-06-19T03:30:30.000Z"><meta property="article:modified_time" content="2020-03-14T01:52:36.555Z"><meta property="og:updated_time" content="2020-03-14T01:52:36.555Z"><meta property="article:author" content="Breakertt"><meta property="article:tag" content="人脸识别, 计算机视觉, Python"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000042.png">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://breakertt.moe/2018/06/19/face_recognition_02/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160680873-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-160680873-1');
+</script>
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://breakertt.moe/2018/06/19/face_recognition_02/",
+    "@type": "BlogPosting",
+    "logo": "https://breakertt.moe/img/favicon/android-chrome-192x192.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breakertt.moe/2018/06/19/face_recognition_02/"
+    },
+    "headline": "FaceNet使用记录 - 我的人脸识别学习笔记02 | Breakertt Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000042.png"
+    },
+    
+    "datePublished": "2018-06-19T03:30:30.000Z",
+    "dateModified": "2020-03-14T01:52:36.555Z",
+    "author": {
+        "@type": "Person",
+        "name": "Breakertt",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://breakertt.moe/img/default_avatar.png"
+        },
+        "description": "一起实现梦想的故事!"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Breakertt Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://breakertt.moe/img/favicon/android-chrome-192x192.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://breakertt.moe/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "人脸识别, 计算机视觉, Python",
+    "description": "即使是用别人的东西也花了好大的气力。 - Breakertt - Breakertt Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
 <link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Breakertt Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">一起实现梦想的故事!</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Breakertt Blog</a></h1>
+
+    <p class="text-center header-slogan">
         
-          <a class="main-nav-link" href="/">Home</a>
+            
+                一起实现梦想的故事!
+            
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/about/" class="navbar-link">关于我</a>
+    
+        <a href="/links/" class="navbar-link">朋友们</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
         
-      </nav>
-      <nav id="sub-nav">
+
+        <!-- Share Twitter -->
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Breakertt Blog&url=https://breakertt.moe&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
         
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://breakertt.moe"></form>
-      </div>
-    </div>
-  </div>
+
+        <!-- Share Facebook -->
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://breakertt.moe&text=FaceNet使用记录 - 我的人脸识别学习笔记02" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB4klEQVR42u3awY6DMAyEYd7/pXdPKyGUzIw3HILzc2nVUvJVCji2c/1seFygQIECNUBd4vj7/n7u8GKP34zOd+OA6oWaDXS/2Oj9DPCEJOOA6odyE9xO0slnpXFAHYFKH6ajiV++HqgjUOqc2Q3x/A2oM1EyUE4WcOphqq63vEoAtT0qSRzeeH09mwG1JcoWHcRErvyZV6suoLZGqaTTDZBOchfgQfVCucmsElO1CJwlq6rwAaofKp3EDj67WWafgeqFUielBfzZpHfFDps4gPosKg2mKmirAkfyEAXVC+UCqSt4qBvFFWtLjW1Qn0Cli7lkYLWIUwVcUL1Q7kJuIeeSzeShC6oXKk0w06K9SxBAnYFyhdjKBptKArpU3Ae1NarSxHbFLxew5Z8E1Q5VaRy6pna6mdVOdFCfRVU2IyebKJKGJqieKFe4SLDuhkkamKD6oFTgrAbjpGEkGwOg2qD+U9hwzchK8AbVC6U23aikMimQpI0DUL1QqwUO1Vx0D0xQPVHJhma3uTRpLkULP1BtUNUF30rwld+BaoVSxa0qID0n2tQFqh3KBdlkU5fcIAHqSFRa8EgXfEvJKKjPoFxSoIJzmiTYwi6oNqgkuMoCaoB0hTlQfVA7HaBAgQJ1O34BpxxxQKh7ScIAAAAASUVORK5CYII=" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-face_recognition_02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2018/06/19/face_recognition_02/" class="article-date">
-  <time class="dt-published" datetime="2018-06-19T03:30:30.000Z" itemprop="datePublished">2018-06-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/编程/">编程</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
         
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      FaceNet使用记录 - 我的人脸识别学习笔记02
-    </h1>
-  
+            <div class="card-image lazyload" data-bg="url('https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000042.png')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">FaceNet使用记录 - 我的人脸识别学习笔记02</h1>
 
-      </header>
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Breakertt's Avatar">
+        <span>2018-06-19</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
     
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>即使是用别人的东西也花了好大的气力。</p>
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=FaceNet使用记录 - 我的人脸识别学习笔记02&url=https://breakertt.moe/2018/06/19/face_recognition_02/&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://breakertt.moe/2018/06/19/face_recognition_02/&text=Breakertt Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB4klEQVR42u3awY6DMAyEYd7/pXdPKyGUzIw3HILzc2nVUvJVCji2c/1seFygQIECNUBd4vj7/n7u8GKP34zOd+OA6oWaDXS/2Oj9DPCEJOOA6odyE9xO0slnpXFAHYFKH6ajiV++HqgjUOqc2Q3x/A2oM1EyUE4WcOphqq63vEoAtT0qSRzeeH09mwG1JcoWHcRErvyZV6suoLZGqaTTDZBOchfgQfVCucmsElO1CJwlq6rwAaofKp3EDj67WWafgeqFUielBfzZpHfFDps4gPosKg2mKmirAkfyEAXVC+UCqSt4qBvFFWtLjW1Qn0Cli7lkYLWIUwVcUL1Q7kJuIeeSzeShC6oXKk0w06K9SxBAnYFyhdjKBptKArpU3Ae1NarSxHbFLxew5Z8E1Q5VaRy6pna6mdVOdFCfRVU2IyebKJKGJqieKFe4SLDuhkkamKD6oFTgrAbjpGEkGwOg2qD+U9hwzchK8AbVC6U23aikMimQpI0DUL1QqwUO1Vx0D0xQPVHJhma3uTRpLkULP1BtUNUF30rwld+BaoVSxa0qID0n2tQFqh3KBdlkU5fcIAHqSFRa8EgXfEvJKKjPoFxSoIJzmiTYwi6oNqgkuMoCaoB0hTlQfVA7HaBAgQJ1O34BpxxxQKh7ScIAAAAASUVORK5CYII=" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                    <article id="post-content">
+                        <p>即使是用别人的东西也花了好大的气力。</p>
 <a id="more"></a>
 <p>首先贴上FaceNet的github <a href="https://github.com/davidsandberg/facenet" target="_blank" rel="noopener">davidsandberg/facenet</a> <a href="https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf" target="_blank" rel="noopener">论文</a></p>
 <h2 id="为什么是FaceNet"><a href="#为什么是FaceNet" class="headerlink" title="为什么是FaceNet?"></a>为什么是FaceNet?</h2><ol>
@@ -107,49 +401,12 @@
 <li>功能性<br>人脸识别主要有两块，一个是对脸的识别，另一个是对人物的ID的识别.FaceNet在这两个功能上都有很好的完成度</li>
 </ol>
 <h2 id="FaceNet的基本使用-此节主要借鉴facenet的wiki"><a href="#FaceNet的基本使用-此节主要借鉴facenet的wiki" class="headerlink" title="FaceNet的基本使用(此节主要借鉴facenet的wiki)"></a>FaceNet的基本使用(此节主要借鉴facenet的<a href="https://github.com/davidsandberg/facenet/wiki/Train-a-classifier-on-own-images" target="_blank" rel="noopener">wiki</a>)</h2><p>此处已经默认装好了相关Python库以及Tensorflow</p>
-<h3 id="1-克隆-FaceNet-的-Github-库"><a href="#1-克隆-FaceNet-的-Github-库" class="headerlink" title="1. 克隆 FaceNet 的 Github 库"></a>1. 克隆 FaceNet 的 Github 库</h3><pre class=" language-powershell"><code class="language-powershell">git clone https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>davidsandberg<span class="token operator">/</span>facenet<span class="token punctuation">.</span>git
-</code></pre>
-<h3 id="2-比对两个人脸的欧式距离"><a href="#2-比对两个人脸的欧式距离" class="headerlink" title="2. 比对两个人脸的欧式距离"></a>2. 比对两个人脸的欧式距离</h3><p>FaceNet是采用CNN神经网络将人脸图像映射到128维的欧几里得空间，我们可以根据两幅人像的欧几里得距离去判断两个人像的相似程度。两个人像之间的欧几里得距离越近，说明它们越相似。一般欧式距离小于1,就可以认为是同一个人。<br><img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png" alt="None"></p>
-<pre class=" language-powershell"><code class="language-powershell">python <span class="token function">compare</span><span class="token punctuation">.</span>py models\20170511<span class="token operator">-</span>185253\20170511<span class="token operator">-</span>185253 Cate_Blanchett_0001<span class="token punctuation">.</span>png  Cate_Blanchett_0002<span class="token punctuation">.</span>png
-</code></pre>
-<h3 id="3-训练自己的数据"><a href="#3-训练自己的数据" class="headerlink" title="3. 训练自己的数据"></a>3. 训练自己的数据</h3><h4 id="训练集的结构"><a href="#训练集的结构" class="headerlink" title="训练集的结构"></a>训练集的结构</h4><p>训练集的结构如下，每个人都有独立的文件夹</p>
-<pre class=" language-Aaron_Eckhart"><code class="language-Aaron_Eckhart">    Aaron_Eckhart_0001.jpg
-
-Aaron_Guiel
-    Aaron_Guiel_0001.jpg
-
-Aaron_Patterson
-    Aaron_Patterson_0001.jpg
-
-Aaron_Peirsol
-    Aaron_Peirsol_0001.jpg
-    Aaron_Peirsol_0002.jpg
-    Aaron_Peirsol_0003.jpg
-    Aaron_Peirsol_0004.jpg
-    ...
-</code></pre>
-<h4 id="剪切出人脸"><a href="#剪切出人脸" class="headerlink" title="剪切出人脸"></a>剪切出人脸</h4><p>FaceNet 提供了使用 MTCNN 对齐人脸的脚本 代码如下</p>
-<pre class=" language-powershell"><code class="language-powershell">python src<span class="token operator">/</span>align<span class="token operator">/</span>align_dataset_mtcnn<span class="token punctuation">.</span>py \
-~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>origin \
-~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>train \
-<span class="token operator">--</span>image_size 182 \
-<span class="token operator">--</span>margin 44
-</code></pre>
-<p>加速多线程版：</p>
-<pre class=" language-powershell"><code class="language-powershell"><span class="token keyword">for</span> N in <span class="token punctuation">{</span>1<span class="token punctuation">.</span><span class="token punctuation">.</span>4<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token keyword">do</span> \
-python src<span class="token operator">/</span>align<span class="token operator">/</span>align_dataset_mtcnn<span class="token punctuation">.</span>py \
-~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>origin \
-~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>train \
-<span class="token operator">--</span>image_size 182 \
-<span class="token operator">--</span>margin 44 \
-<span class="token operator">--</span>random_order \
-<span class="token operator">--</span>gpu_memory_fraction 0<span class="token punctuation">.</span>25 \
-&amp; done
-</code></pre>
-<h4 id="训练-pkl"><a href="#训练-pkl" class="headerlink" title="训练.pkl"></a>训练.pkl</h4><pre class=" language-powershell"><code class="language-powershell">python src<span class="token operator">/</span>classifier<span class="token punctuation">.</span>py TRAIN ~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>train<span class="token operator">/</span> ~<span class="token operator">/</span>models<span class="token operator">/</span>model<span class="token operator">-</span>20170216<span class="token operator">-</span>091149<span class="token punctuation">.</span>pb ~<span class="token operator">/</span>models<span class="token operator">/</span>my_classifier<span class="token punctuation">.</span>pkl <span class="token operator">--</span>batch_size 1000
-</code></pre>
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre class=" language-powershell"><code class="language-powershell">python src<span class="token operator">/</span>classifier<span class="token punctuation">.</span>py CLASSIFY ~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>test<span class="token operator">/</span> ~<span class="token operator">/</span>models<span class="token operator">/</span>model<span class="token operator">-</span>20170216<span class="token operator">-</span>091149<span class="token punctuation">.</span>pb ~<span class="token operator">/</span>models<span class="token operator">/</span>my_classifier<span class="token punctuation">.</span>pkl <span class="token operator">--</span>batch_size 1000
-</code></pre>
+<h3 id="1-克隆-FaceNet-的-Github-库"><a href="#1-克隆-FaceNet-的-Github-库" class="headerlink" title="1. 克隆 FaceNet 的 Github 库"></a>1. 克隆 FaceNet 的 Github 库</h3><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/davidsandberg/facenet.git</span><br></pre></td></tr></table></figure>
+<h3 id="2-比对两个人脸的欧式距离"><a href="#2-比对两个人脸的欧式距离" class="headerlink" title="2. 比对两个人脸的欧式距离"></a>2. 比对两个人脸的欧式距离</h3><p>FaceNet是采用CNN神经网络将人脸图像映射到128维的欧几里得空间，我们可以根据两幅人像的欧几里得距离去判断两个人像的相似程度。两个人像之间的欧几里得距离越近，说明它们越相似。一般欧式距离小于1,就可以认为是同一个人。<br><img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png" alt="None"><br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">python compare.py models\<span class="number">20170511</span><span class="literal">-185253</span>\<span class="number">20170511</span><span class="literal">-185253</span> Cate_Blanchett_0001.png  Cate_Blanchett_0002.png</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-训练自己的数据"><a href="#3-训练自己的数据" class="headerlink" title="3. 训练自己的数据"></a>3. 训练自己的数据</h3><h4 id="训练集的结构"><a href="#训练集的结构" class="headerlink" title="训练集的结构"></a>训练集的结构</h4><p>训练集的结构如下，每个人都有独立的文件夹<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    Aaron_Eckhart_0001.jpg</span><br><span class="line"></span><br><span class="line">Aaron_Guiel</span><br><span class="line">    Aaron_Guiel_0001.jpg</span><br><span class="line"></span><br><span class="line">Aaron_Patterson</span><br><span class="line">    Aaron_Patterson_0001.jpg</span><br><span class="line"></span><br><span class="line">Aaron_Peirsol</span><br><span class="line">    Aaron_Peirsol_0001.jpg</span><br><span class="line">    Aaron_Peirsol_0002.jpg</span><br><span class="line">    Aaron_Peirsol_0003.jpg</span><br><span class="line">    Aaron_Peirsol_0004.jpg</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure></p>
+<h4 id="剪切出人脸"><a href="#剪切出人脸" class="headerlink" title="剪切出人脸"></a>剪切出人脸</h4><p>FaceNet 提供了使用 MTCNN 对齐人脸的脚本 代码如下<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">python src/align/align_dataset_mtcnn.py \</span><br><span class="line">~/datasets/my_dataset/origin \</span><br><span class="line">~/datasets/my_dataset/train \</span><br><span class="line">-<span class="literal">-image_size</span> <span class="number">182</span> \</span><br><span class="line">-<span class="literal">-margin</span> <span class="number">44</span></span><br></pre></td></tr></table></figure><br>加速多线程版：<br><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> N <span class="keyword">in</span> &#123;<span class="number">1</span>..<span class="number">4</span>&#125;; <span class="keyword">do</span> \</span><br><span class="line">python src/align/align_dataset_mtcnn.py \</span><br><span class="line">~/datasets/my_dataset/origin \</span><br><span class="line">~/datasets/my_dataset/train \</span><br><span class="line">-<span class="literal">-image_size</span> <span class="number">182</span> \</span><br><span class="line">-<span class="literal">-margin</span> <span class="number">44</span> \</span><br><span class="line">-<span class="literal">-random_order</span> \</span><br><span class="line">-<span class="literal">-gpu_memory_fraction</span> <span class="number">0.25</span> \</span><br><span class="line">&amp; done</span><br></pre></td></tr></table></figure></p>
+<h4 id="训练-pkl"><a href="#训练-pkl" class="headerlink" title="训练.pkl"></a>训练.pkl</h4><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">python src/classifier.py TRAIN ~/datasets/my_dataset/train/ ~/models/model<span class="literal">-20170216</span><span class="literal">-091149</span>.pb ~/models/my_classifier.pkl -<span class="literal">-batch_size</span> <span class="number">1000</span></span><br></pre></td></tr></table></figure>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">python src/classifier.py CLASSIFY ~/datasets/my_dataset/test/ ~/models/model<span class="literal">-20170216</span><span class="literal">-091149</span>.pb ~/models/my_classifier.pkl -<span class="literal">-batch_size</span> <span class="number">1000</span></span><br></pre></td></tr></table></figure>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>既然已经大概了解FaceNet怎么用了，就要开始真正的魔改应用之路了！下回见分晓。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献:"></a>参考文献:</h2><ol>
 <li><a href="https://zhuanlan.zhihu.com/p/24837264" target="_blank" rel="noopener">谷歌人脸识别系统FaceNet解析</a></li>
@@ -158,150 +415,200 @@ python src<span class="token operator">/</span>align<span class="token operator"
 <li><a href="https://www.cnblogs.com/xiaohuahua108/p/6505756.html" target="_blank" rel="noopener">FaceNet—深度学习与人脸识别的二次结合</a></li>
 </ol>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://breakertt.moe/2018/06/19/face_recognition_02/" data-id="ck7qyi97b000fs0d26q84rwmk" data-title="FaceNet使用记录 - 我的人脸识别学习笔记02" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+                    </article>
+                    
 
-    </footer>
-  </div>
-  
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-03-14");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2018-06-19T03:30:30.000Z" itemprop="datePublished">2018-06-19</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-03-14T01:52:36.555Z" itemprop="dateModified">2020-03-14</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/%E7%BC%96%E7%A8%8B/'>编程</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/" rel="tag">#&nbsp;人脸识别</a>
+
+<a class="post-tags-list-item" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/" rel="tag">#&nbsp;计算机视觉</a>
+
+<a class="post-tags-list-item" href="/tags/Python/" rel="tag">#&nbsp;Python</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
     
-<nav id="article-nav">
-  
-    <a href="/2018/06/22/face_recognition_03/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/06/07/face_recognition_01/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
+        <li class="page-item page-prev">
+            <a href="/2018/06/22/face_recognition_03/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇</div>
+            </a>
+        </li>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Media/">Media</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MiuNottingham/">MiuNottingham</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a></li></ul>
-    </div>
-  </div>
 
-
-  
+    <!-- Next Nav -->
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VideoTech/">VideoTech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
-    </div>
-  </div>
-
-
-  
+        <li class="page-item page-next">
+            <a href="/2018/06/07/face_recognition_01/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01</div>
+            </a>
+        </li>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/Network/" style="font-size: 13.33px;">Network</a> <a href="/tags/Proxy/" style="font-size: 13.33px;">Proxy</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VideoTech/" style="font-size: 10px;">VideoTech</a> <a href="/tags/人脸识别/" style="font-size: 16.67px;">人脸识别</a> <a href="/tags/计算机视觉/" style="font-size: 20px;">计算机视觉</a>
-    </div>
-  </div>
+</ul>
+</div>
 
-  
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+
+<div class="btn_click_load"> 
+    <button id="disqus_click_btn" class="btn">阅读评论（请确保 disqus 可以正常加载）</button>
+</div>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://breakertt.moe/2018/06/19/face_recognition_02/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://breakertt.moe/2018/06/19/face_recognition_02/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script id="disqus-lazy-load-script">
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://disqus.com/next/config.json', true);
+    xhr.timeout = 4000;
+    xhr.send();
+    xhr.onload = function() {
+        if(this.status == 200||this.status == 304){
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//breakertt-moe.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+            document.getElementById('disqus_click_btn').setAttribute("style", "display:none")
+        }
+    };
+    xhr.ontimeout = function(e) {
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:block");
+    };
+    xhr.onerror = function(e) {
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:block");
+    };
+    document.getElementById('disqus_click_btn').onclick=function() { //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//breakertt-moe.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:none")
+    };
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li></ul>
-    </div>
-  </div>
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://breakertt.moe">Breakertt Blog</a>
+        </p>
 
-
-  
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
         
-          <li>
-            <a href="/2019/08/20/baidupcsgo-web-proxy/">Baidupcs-web 在 apache2 上的反向代理配置</a>
-          </li>
-        
-          <li>
-            <a href="/2019/08/20/clash_gateway/">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/16/encoded_subtitle/">使用AegiSub和FFmpeg为视频打上字幕(啊？Pr是什么？)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/10/14/lisense_plate_recognition/">车牌识别</a>
-          </li>
-        
-          <li>
-            <a href="/2018/07/02/miunottingham_logos_gzh/">宁诺公众号大全</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
         
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 Breakertt<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
 </footer>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2018;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
     
 
-<script src="/js/jquery-3.4.1.min.js"></script>
 
+<!-- ### Custom Footer ### -->
 
-  <script src="/fancybox/jquery.fancybox.min.js"></script>
+    </body>
 
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
 </html>
