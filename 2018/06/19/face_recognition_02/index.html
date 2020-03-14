@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  <title>FaceNet使用记录 - 我的人脸识别学习笔记02 | Breakertt Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="即使是用别人的东西也花了好大的气力。">
+<meta name="keywords" content="人脸识别,计算机视觉,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FaceNet使用记录 - 我的人脸识别学习笔记02">
+<meta property="og:url" content="https://breakertt.moe/2018/06/19/face_recognition_02/index.html">
+<meta property="og:site_name" content="Breakertt Blog">
+<meta property="og:description" content="即使是用别人的东西也花了好大的气力。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png">
+<meta property="og:updated_time" content="2020-03-14T01:52:36.555Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FaceNet使用记录 - 我的人脸识别学习笔记02">
+<meta name="twitter:description" content="即使是用别人的东西也花了好大的气力。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Breakertt Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Breakertt Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起实现梦想的故事!</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://breakertt.moe"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-face_recognition_02" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/19/face_recognition_02/" class="article-date">
+  <time class="dt-published" datetime="2018-06-19T03:30:30.000Z" itemprop="datePublished">2018-06-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      FaceNet使用记录 - 我的人脸识别学习笔记02
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>即使是用别人的东西也花了好大的气力。</p>
+<a id="more"></a>
+<p>首先贴上FaceNet的github <a href="https://github.com/davidsandberg/facenet" target="_blank" rel="noopener">davidsandberg/facenet</a> <a href="https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Schroff_FaceNet_A_Unified_2015_CVPR_paper.pdf" target="_blank" rel="noopener">论文</a></p>
+<h2 id="为什么是FaceNet"><a href="#为什么是FaceNet" class="headerlink" title="为什么是FaceNet?"></a>为什么是FaceNet?</h2><ol>
+<li>机器环境<br>老板给的机器已经配好了 TensorFlow + Cuda, FaceNet所需的环境正好是这个 √</li>
+<li>社区资源<br>Github上使用FaceNet进行二次开发的样例非常多<br>例如:<a href="https://github.com/shanren7/real_time_face_recognition" target="_blank" rel="noopener">shanren7</a> <a href="https://github.com/bearsprogrammer/real-time-deep-face-recognition/" target="_blank" rel="noopener">bearsprogrammer</a></li>
+<li>识别率和预处理模型的提供<br>FaceNet提供的预处理模型在LFW测试数据集上的准确度已经达到了99.65%,并且提供了分别以 CASIA-WebFace 和 VGGFace2 为训练集的预处理模型.</li>
+<li>功能性<br>人脸识别主要有两块，一个是对脸的识别，另一个是对人物的ID的识别.FaceNet在这两个功能上都有很好的完成度</li>
+</ol>
+<h2 id="FaceNet的基本使用-此节主要借鉴facenet的wiki"><a href="#FaceNet的基本使用-此节主要借鉴facenet的wiki" class="headerlink" title="FaceNet的基本使用(此节主要借鉴facenet的wiki)"></a>FaceNet的基本使用(此节主要借鉴facenet的<a href="https://github.com/davidsandberg/facenet/wiki/Train-a-classifier-on-own-images" target="_blank" rel="noopener">wiki</a>)</h2><p>此处已经默认装好了相关Python库以及Tensorflow</p>
+<h3 id="1-克隆-FaceNet-的-Github-库"><a href="#1-克隆-FaceNet-的-Github-库" class="headerlink" title="1. 克隆 FaceNet 的 Github 库"></a>1. 克隆 FaceNet 的 Github 库</h3><pre class=" language-powershell"><code class="language-powershell">git clone https:<span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>davidsandberg<span class="token operator">/</span>facenet<span class="token punctuation">.</span>git
+</code></pre>
+<h3 id="2-比对两个人脸的欧式距离"><a href="#2-比对两个人脸的欧式距离" class="headerlink" title="2. 比对两个人脸的欧式距离"></a>2. 比对两个人脸的欧式距离</h3><p>FaceNet是采用CNN神经网络将人脸图像映射到128维的欧几里得空间，我们可以根据两幅人像的欧几里得距离去判断两个人像的相似程度。两个人像之间的欧几里得距离越近，说明它们越相似。一般欧式距离小于1,就可以认为是同一个人。<br><img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0619/999009-20170305161101282-1344836451.png" alt="None"></p>
+<pre class=" language-powershell"><code class="language-powershell">python <span class="token function">compare</span><span class="token punctuation">.</span>py models\20170511<span class="token operator">-</span>185253\20170511<span class="token operator">-</span>185253 Cate_Blanchett_0001<span class="token punctuation">.</span>png  Cate_Blanchett_0002<span class="token punctuation">.</span>png
+</code></pre>
+<h3 id="3-训练自己的数据"><a href="#3-训练自己的数据" class="headerlink" title="3. 训练自己的数据"></a>3. 训练自己的数据</h3><h4 id="训练集的结构"><a href="#训练集的结构" class="headerlink" title="训练集的结构"></a>训练集的结构</h4><p>训练集的结构如下，每个人都有独立的文件夹</p>
+<pre class=" language-Aaron_Eckhart"><code class="language-Aaron_Eckhart">    Aaron_Eckhart_0001.jpg
+
+Aaron_Guiel
+    Aaron_Guiel_0001.jpg
+
+Aaron_Patterson
+    Aaron_Patterson_0001.jpg
+
+Aaron_Peirsol
+    Aaron_Peirsol_0001.jpg
+    Aaron_Peirsol_0002.jpg
+    Aaron_Peirsol_0003.jpg
+    Aaron_Peirsol_0004.jpg
+    ...
+</code></pre>
+<h4 id="剪切出人脸"><a href="#剪切出人脸" class="headerlink" title="剪切出人脸"></a>剪切出人脸</h4><p>FaceNet 提供了使用 MTCNN 对齐人脸的脚本 代码如下</p>
+<pre class=" language-powershell"><code class="language-powershell">python src<span class="token operator">/</span>align<span class="token operator">/</span>align_dataset_mtcnn<span class="token punctuation">.</span>py \
+~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>origin \
+~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>train \
+<span class="token operator">--</span>image_size 182 \
+<span class="token operator">--</span>margin 44
+</code></pre>
+<p>加速多线程版：</p>
+<pre class=" language-powershell"><code class="language-powershell"><span class="token keyword">for</span> N in <span class="token punctuation">{</span>1<span class="token punctuation">.</span><span class="token punctuation">.</span>4<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token keyword">do</span> \
+python src<span class="token operator">/</span>align<span class="token operator">/</span>align_dataset_mtcnn<span class="token punctuation">.</span>py \
+~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>origin \
+~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>train \
+<span class="token operator">--</span>image_size 182 \
+<span class="token operator">--</span>margin 44 \
+<span class="token operator">--</span>random_order \
+<span class="token operator">--</span>gpu_memory_fraction 0<span class="token punctuation">.</span>25 \
+&amp; done
+</code></pre>
+<h4 id="训练-pkl"><a href="#训练-pkl" class="headerlink" title="训练.pkl"></a>训练.pkl</h4><pre class=" language-powershell"><code class="language-powershell">python src<span class="token operator">/</span>classifier<span class="token punctuation">.</span>py TRAIN ~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>train<span class="token operator">/</span> ~<span class="token operator">/</span>models<span class="token operator">/</span>model<span class="token operator">-</span>20170216<span class="token operator">-</span>091149<span class="token punctuation">.</span>pb ~<span class="token operator">/</span>models<span class="token operator">/</span>my_classifier<span class="token punctuation">.</span>pkl <span class="token operator">--</span>batch_size 1000
+</code></pre>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><pre class=" language-powershell"><code class="language-powershell">python src<span class="token operator">/</span>classifier<span class="token punctuation">.</span>py CLASSIFY ~<span class="token operator">/</span>datasets<span class="token operator">/</span>my_dataset<span class="token operator">/</span>test<span class="token operator">/</span> ~<span class="token operator">/</span>models<span class="token operator">/</span>model<span class="token operator">-</span>20170216<span class="token operator">-</span>091149<span class="token punctuation">.</span>pb ~<span class="token operator">/</span>models<span class="token operator">/</span>my_classifier<span class="token punctuation">.</span>pkl <span class="token operator">--</span>batch_size 1000
+</code></pre>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>既然已经大概了解FaceNet怎么用了，就要开始真正的魔改应用之路了！下回见分晓。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献:"></a>参考文献:</h2><ol>
+<li><a href="https://zhuanlan.zhihu.com/p/24837264" target="_blank" rel="noopener">谷歌人脸识别系统FaceNet解析</a></li>
+<li><a href="https://blog.csdn.net/u013044310/article/details/79556099" target="_blank" rel="noopener">史上最全的FaceNet源码使用方法和讲解（一）（附预训练模型下载）</a></li>
+<li><a href="https://blog.csdn.net/xingwei_09/article/details/79161931" target="_blank" rel="noopener">人脸识别（Facenet）</a></li>
+<li><a href="https://www.cnblogs.com/xiaohuahua108/p/6505756.html" target="_blank" rel="noopener">FaceNet—深度学习与人脸识别的二次结合</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://breakertt.moe/2018/06/19/face_recognition_02/" data-id="ck7qyi97b000fs0d26q84rwmk" data-title="FaceNet使用记录 - 我的人脸识别学习笔记02" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/22/face_recognition_03/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/07/face_recognition_01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Media/">Media</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MiuNottingham/">MiuNottingham</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VideoTech/">VideoTech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/Network/" style="font-size: 13.33px;">Network</a> <a href="/tags/Proxy/" style="font-size: 13.33px;">Proxy</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VideoTech/" style="font-size: 10px;">VideoTech</a> <a href="/tags/人脸识别/" style="font-size: 16.67px;">人脸识别</a> <a href="/tags/计算机视觉/" style="font-size: 20px;">计算机视觉</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/20/baidupcsgo-web-proxy/">Baidupcs-web 在 apache2 上的反向代理配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/20/clash_gateway/">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/encoded_subtitle/">使用AegiSub和FFmpeg为视频打上字幕(啊？Pr是什么？)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/14/lisense_plate_recognition/">车牌识别</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/miunottingham_logos_gzh/">宁诺公众号大全</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Breakertt<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

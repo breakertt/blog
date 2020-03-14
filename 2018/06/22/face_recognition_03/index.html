@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  <title>魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇 | Breakertt Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="魔改即是正义！">
+<meta name="keywords" content="人脸识别,计算机视觉,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇">
+<meta property="og:url" content="https://breakertt.moe/2018/06/22/face_recognition_03/index.html">
+<meta property="og:site_name" content="Breakertt Blog">
+<meta property="og:description" content="魔改即是正义！">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0621/FRWTS.png">
+<meta property="og:updated_time" content="2020-03-14T01:52:36.556Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇">
+<meta name="twitter:description" content="魔改即是正义！">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0621/FRWTS.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Breakertt Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+<link rel="stylesheet" href="/css/prism.css" type="text/css"><link rel="stylesheet" href="\assets\css\APlayer.min.css" class="aplayer-style-marker">
+<script src="\assets\js\APlayer.min.js" class="aplayer-script-marker"></script>
+<script src="\assets\js\Meting.min.js" class="meting-script-marker"></script>
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Breakertt Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起实现梦想的故事!</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://breakertt.moe"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-face_recognition_03" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/22/face_recognition_03/" class="article-date">
+  <time class="dt-published" datetime="2018-06-22T09:28:30.000Z" itemprop="datePublished">2018-06-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>魔改即是正义！</p>
+<a id="more"></a>
+
+    <div id="aplayer-fnmoeZnH" class="aplayer aplayer-tag-marker meting-tag-marker" data-id="474574924" data-server="netease" data-type="song" data-mode="circulation" data-autoplay="true" data-mutex="true" data-listmaxheight="340px" data-preload="auto" data-theme="#ad7a86"></div>
+<p><em>本文写于年轻人(也就是我)的第一次加班(谁让我在下班前开始了神经网络的训练呢)</em></p>
+<p>我的魔改成果 <a href="https://github.com/imaginebreake/face_recognition_with_TCPsocket" target="_blank" rel="noopener">face_recognition_with_TCPsocket</a><br>顺便上个逻辑图 <img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0621/FRWTS.png" alt="None"></p>
+<h2 id="寻找志同道合者并沆瀣一气-不是"><a href="#寻找志同道合者并沆瀣一气-不是" class="headerlink" title="寻找志同道合者并沆瀣一气(不是"></a>寻找志同道合者并沆瀣一气(不是</h2><p>根据学习笔记02，我已经对FaceNet的使用有了初步的了解。FaceNet自带的Demo用来做人脸数据库并识别人脸已经是很完善的了，所以需要做的改动并没有想象的那么多。我第一步要达到的是能在本地提取一个人并输入照片的时候可以返回框出人脸并带上人名的图像，基于这个目的，我去Github上搜索了一些同样是基于FaceNet二次开发的项目。</p>
+<p>首先找到的是shanren7的一个实时人脸识别的项目，这个项目和我需要的基本一致，但是问题有二:</p>
+<ol>
+<li>只能输出一个人QAQ</li>
+<li>用的预训练模型并不是davidsandberg/facenet内提供的</li>
+</ol>
+<p>然后我继续寻找，找到了借鉴了shanren7项目开发的另一个项目<a href="https://github.com/bearsprogrammer/real-time-deep-face-recognition/" target="_blank" rel="noopener">bearsprogrammer/real-time-deep-face-recognition</a>.这个项目正好解决了前一个提到的两个问题，但是同时也出现了一些其他的问题.</p>
+<ol>
+<li>开发者用Python程序内定义好的list来储存人名，要实时更新并不方便。</li>
+<li>这个系统是纯本地的，但是我要做的系统是可以远程训练和识别的。</li>
+</ol>
+<p>其中问题一其实只是一个小问题，很快就能搞定；而问题二基本上是开发一个新功能了，工作量比较大，也摸了好几天。</p>
+<p>需要一提的是，这两个项目的主要的Detect的程序也是由FaceNet的demo修改而来。</p>
+<p>那接下来就来对这个项目进行进一步的开发！</p>
+<h2 id="问题一"><a href="#问题一" class="headerlink" title="问题一"></a>问题一</h2><p>对于问题一的解决，在数据量不大的时候最好的方案就是把这个list单独搞一个文本文件，在每次识别的时候读取为list(数据量上去就要用数据库了)。选择有两个，json和csv，因为我这个字段只有一个编号和人名，用csv比较清爽所以就这么决定了。Python对csv的调用非常简单了，代码如下:</p>
+<p><strong>读取</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"./models/human_name.csv"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    human_name_reader <span class="token operator">=</span> csv<span class="token punctuation">.</span>reader<span class="token punctuation">(</span>f<span class="token punctuation">)</span>
+    HumanNames <span class="token operator">=</span> <span class="token punctuation">[</span>row<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token keyword">for</span> row <span class="token keyword">in</span> human_name_reader<span class="token punctuation">]</span>
+    <span class="token keyword">del</span> HumanNames<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+</code></pre>
+<p><strong>追加</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"./models/human_name.csv"</span><span class="token punctuation">,</span> <span class="token string">'a+'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+    f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>str<span class="token punctuation">(</span>count<span class="token punctuation">)</span><span class="token punctuation">.</span>zfill<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">","</span> <span class="token operator">+</span> name <span class="token operator">+</span> <span class="token string">"\n"</span><span class="token punctuation">)</span>
+</code></pre>
+<p>问题一就这样解决了!</p>
+<h2 id="问题二"><a href="#问题二" class="headerlink" title="问题二"></a>问题二</h2><h3 id="远程检测"><a href="#远程检测" class="headerlink" title="远程检测"></a>远程检测</h3><p>在我把问题一解决之后，老板说:那你给这个项目加个Socket，然后我就一脸懵逼:Socket是啥???然后我就去百度了一波。Socket其实是一种对TCP/IP的封装，要给我的项目加上Socket，也就是加上通过网络检测和训练的功能。C我是不太熟的，Python也有现成的Socket库，那就用Python了。<br>关于Python上Socket的编写，我很大程度上参考了简书上的<a href="https://www.jianshu.com/p/2a4b859e05df" target="_blank" rel="noopener">一篇文章</a>,同样都是传输图像。<br>啃了一个下午，总算是把检测部分的代码搞了出来，并在本机检测通过，中间有几个我觉得值得一提的小波折。</p>
+<p>1.图像文件之后发送过去之后,文件体积一致,但是文件头里面多了一些之前的传输信息,花了一个小时debug总算是找到了问题所在。<br><strong>修改前</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> sock<span class="token punctuation">.</span>recv<span class="token punctuation">(</span>SIZE<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token operator">not</span> data <span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">'reach the end of file'</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">elif</span> data <span class="token operator">==</span> <span class="token string">'begin to send'</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span> <span class="token string">'create file'</span>
+        checkFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"./mydataset/test/test.jpg"</span><span class="token punctuation">,</span> <span class="token string">"wb"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            <span class="token keyword">pass</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"./mydataset/test/test.jpg"</span><span class="token punctuation">,</span> <span class="token string">"ab"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+</code></pre>
+<p><strong>修改后</strong></p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">while</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> connection<span class="token punctuation">.</span>recv<span class="token punctuation">(</span>SIZE<span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token operator">not</span> data <span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"reach the end of file"</span><span class="token punctuation">)</span>
+        <span class="token keyword">break</span>
+    <span class="token keyword">elif</span> data <span class="token operator">==</span> <span class="token string">'begin to send'</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"create file"</span><span class="token punctuation">)</span>
+        checkFile<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"./mydataset/test/test.jpg"</span><span class="token punctuation">,</span> <span class="token string">"wb"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            data <span class="token operator">=</span> None
+            <span class="token keyword">pass</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">with</span> open<span class="token punctuation">(</span><span class="token string">"./mydataset/test/test.jpg"</span><span class="token punctuation">,</span> <span class="token string">"ab"</span><span class="token punctuation">)</span> <span class="token keyword">as</span> f<span class="token punctuation">:</span>
+            f<span class="token punctuation">.</span>write<span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+</code></pre>
+<p>问题就在于没有对socket接收的缓存数据进行清空</p>
+<p>2.Ubuntu的防火墙:要现在本机的防火墙上先开放要使用的端口</p>
+<p>本机测试通过了,我就开始拿笔记本远程调试,中间出现了一些因为python版本导致的问题，就不具体说了，<a href="https://blog.csdn.net/yexiaohhjk/article/details/68066843" target="_blank" rel="noopener">请看此</a>,解决这个问题之后程序跑的十分顺利。</p>
+<h3 id="远程登记人脸"><a href="#远程登记人脸" class="headerlink" title="远程登记人脸"></a>远程登记人脸</h3><p>我的想法是调用电脑的摄像头存下一系列照片然后打包成.zip发送给服务器，然后进行人脸对齐和特征的储存。中间基本上没遇到什么太大的问题。</p>
+<h3 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h3><p>之前无论哪个操作，服务器端都是直接用Python调用命令，这样每次都是要重新打开一个TensorFlow的Session，耗时很不乐观。所以我决定人脸检测这部分一直使用同一个Session，训练的时候再重开另一个Session。<br>这样就会出现一个问题，就是每次人脸登记完之后要重新加载包含人名的.csv和包含人脸特征的.pkls,所以我在代码中添加了一个update的变量让程序知道是否要重新加载。<br>为了更好的交互，我第一次接触了Visual Studio并配好了Opencv，步履维艰的写下了自己人生中第一个C++程序，想必以后还有的是打交道的机会。这个C++的控制台小程序可以调用client_dete.py和client_train.py。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p><a href="https://github.com/imaginebreake" target="_blank" rel="noopener">Github</a>里面总算是有了个不少是自己写的代码的项目，完结撒花！</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献:"></a>参考文献:</h2><ol>
+<li><a href="https://github.com/shanren7/real_time_face_recognition" target="_blank" rel="noopener">shanren7/real_time_face_recognition</a></li>
+<li><a href="https://github.com/bearsprogrammer/real-time-deep-face-recognition/" target="_blank" rel="noopener">bearsprogrammer/real-time-deep-face-recognition</a></li>
+<li><a href="https://blog.csdn.net/Pk_zsq/article/details/6087367" target="_blank" rel="noopener">TCP/IP、Http、Socket的区别</a></li>
+<li><a href="https://www.jianshu.com/p/2a4b859e05df" target="_blank" rel="noopener">[毕设记录] python利用socket进行文件传输</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://breakertt.moe/2018/06/22/face_recognition_03/" data-id="ck7qyi97d000js0d2qx35bti2" data-title="魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/07/02/miunottingham_logos_gzh/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          宁诺公众号大全
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/06/19/face_recognition_02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">FaceNet使用记录 - 我的人脸识别学习笔记02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Media/">Media</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MiuNottingham/">MiuNottingham</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VideoTech/">VideoTech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/Network/" style="font-size: 13.33px;">Network</a> <a href="/tags/Proxy/" style="font-size: 13.33px;">Proxy</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VideoTech/" style="font-size: 10px;">VideoTech</a> <a href="/tags/人脸识别/" style="font-size: 16.67px;">人脸识别</a> <a href="/tags/计算机视觉/" style="font-size: 20px;">计算机视觉</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/20/baidupcsgo-web-proxy/">Baidupcs-web 在 apache2 上的反向代理配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/20/clash_gateway/">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/encoded_subtitle/">使用AegiSub和FFmpeg为视频打上字幕(啊？Pr是什么？)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/14/lisense_plate_recognition/">车牌识别</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/miunottingham_logos_gzh/">宁诺公众号大全</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Breakertt<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

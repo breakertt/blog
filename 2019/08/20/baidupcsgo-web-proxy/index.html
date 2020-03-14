@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  <title>Baidupcs-web 在 apache2 上的反向代理配置 | Breakertt Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="此处省略一万句脏话。">
+<meta name="keywords" content="Network,Proxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Baidupcs-web 在 apache2 上的反向代理配置">
+<meta property="og:url" content="https://breakertt.moe/2019/08/20/baidupcsgo-web-proxy/index.html">
+<meta property="og:site_name" content="Breakertt Blog">
+<meta property="og:description" content="此处省略一万句脏话。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-03-14T01:52:36.553Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Baidupcs-web 在 apache2 上的反向代理配置">
+<meta name="twitter:description" content="此处省略一万句脏话。">
+  
+    <link rel="alternate" href="/atom.xml" title="Breakertt Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Breakertt Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起实现梦想的故事!</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://breakertt.moe"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-baidupcsgo-web-proxy" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/08/20/baidupcsgo-web-proxy/" class="article-date">
+  <time class="dt-published" datetime="2019-08-20T08:10:00.000Z" itemprop="datePublished">2019-08-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Baidupcs-web 在 apache2 上的反向代理配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>此处省略一万句脏话。</p>
+<a id="more"></a>
+<p>最近被安利了一个webui版本的baidupcs-go，叫做BiaduPCS-Web，据说不错我就也来用用。</p>
+<p>安装很容易，使用了GitHub上的一键脚本：<a href="https://github.com/user1121114685/baidupcsweb" target="_blank" rel="noopener">https://github.com/user1121114685/baidupcsweb</a></p>
+<p>但是服务起来之后用的是5299端口，不太优雅对吧？那我就想着做个反代好了，也就是本文的重点了。</p>
+<p>一开始我是想配一个类似于”<a href="http://server/pan/&quot;" target="_blank" rel="noopener">http://server/pan/&quot;</a>, 这样的子目录的反向代理的，但是这个软件不支持baseURL的配置以及路径都是写死的，那就只能单开一个域名给这个软件了。如果您使用的http服务器是nginx请看这里：<a href="https://github.com/liuzhuoling2011/baidupcs-web/issues/20" target="_blank" rel="noopener">请问如何用nginx进行反向代理</a>，caddy我也不太清楚，反正这篇文章讲的只有apache的。</p>
+<p>这个软件有部分链接用的不是http，而是websocket，这就是问题所在了，查了不少资料，我们需要先开启用几个插件：</p>
+<pre class=" language-shell"><code class="language-shell">a2enmod proxy
+a2enmod proxy_http
+a2enmod rewrite
+sudo systemctl restart apache2
+</code></pre>
+<p>然后添加如下的新站点，只开了443的，80请自己改，内容如下：</p>
+<pre><code>&lt;VirtualHost *:443&gt;
+    ServerName pan.abc.com ######
+
+    SSLCertificateFile  /etc/apache2/ssl/pan/cert.pem ######
+    SSLCertificateKeyFile /etc/apache2/ssl/pan/key.pem ######
+    SSLCertificateChainFile /etc/apache2/ssl/pan/chain.pem ######
+
+    SSLEngine on
+
+    ProxyPreserveHost On
+    ProxyRequests Off
+    RewriteEngine On
+
+    RewriteCond %{HTTP:Upgrade} = websocket [NC]
+    RewriteCond %{HTTP:CONNECTION} ^Upgrade$ [NC]
+    RewriteRule /ws(.*)           ws://localhost:5299/ws$1 [P,L]
+    RequestHeader set X-Forwarded-Proto &quot;https&quot;
+
+    &lt;Location /ws&gt;
+        Require all granted
+        ProxyPassReverse ws://127.0.0.1:5299/ws
+    &lt;/Location&gt;
+
+    &lt;Location /&gt;
+        Require all granted
+        ProxyPass http://localhost:5299/
+        ProxyPassReverse /
+    &lt;/Location&gt;
+
+&lt;/VirtualHost&gt;
+</code></pre><p>简单讲一下，这边把当http请求需要升级为ws请求时，把反代的头改成了ws，然后就可以成功访问了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://breakertt.moe/2019/08/20/baidupcsgo-web-proxy/" data-id="ck7qyi96h0000s0d25yf1a6oh" data-title="Baidupcs-web 在 apache2 上的反向代理配置" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Network/">Network</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Proxy/">Proxy</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/20/clash_gateway/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Media/">Media</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MiuNottingham/">MiuNottingham</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VideoTech/">VideoTech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/Network/" style="font-size: 13.33px;">Network</a> <a href="/tags/Proxy/" style="font-size: 13.33px;">Proxy</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VideoTech/" style="font-size: 10px;">VideoTech</a> <a href="/tags/人脸识别/" style="font-size: 16.67px;">人脸识别</a> <a href="/tags/计算机视觉/" style="font-size: 20px;">计算机视觉</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/20/baidupcsgo-web-proxy/">Baidupcs-web 在 apache2 上的反向代理配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/20/clash_gateway/">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/encoded_subtitle/">使用AegiSub和FFmpeg为视频打上字幕(啊？Pr是什么？)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/14/lisense_plate_recognition/">车牌识别</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/miunottingham_logos_gzh/">宁诺公众号大全</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Breakertt<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

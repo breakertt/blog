@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+  <title>人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01 | Breakertt Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="面向谷歌、百度、github、Stackoverflow编程">
+<meta name="keywords" content="人脸识别,计算机视觉">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01">
+<meta property="og:url" content="https://breakertt.moe/2018/06/07/face_recognition_01/index.html">
+<meta property="og:site_name" content="Breakertt Blog">
+<meta property="og:description" content="面向谷歌、百度、github、Stackoverflow编程">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000428.gif">
+<meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000459.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0614/RCNN.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0614/20170817161936858.jpg">
+<meta property="og:updated_time" content="2020-03-14T01:52:36.555Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01">
+<meta name="twitter:description" content="面向谷歌、百度、github、Stackoverflow编程">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000428.gif">
+  
+    <link rel="alternate" href="/atom.xml" title="Breakertt Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Breakertt Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一起实现梦想的故事!</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://breakertt.moe"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-face_recognition_01" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/07/face_recognition_01/" class="article-date">
+  <time class="dt-published" datetime="2018-06-07T06:16:50.000Z" itemprop="datePublished">2018-06-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>面向谷歌、百度、github、Stackoverflow编程</p>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>想了一想，离高考结束也已经一年零几天了。在水校的一年也并没有学到什么，算是又荒废了一年光阴。因此决定建一个博客，督促自己不断学习而非继续碌碌无为。</p>
+<p>期末考试大概是5月25日考完的，在家休息了大概一个星期之后，终于来到了实习单位，之前也略闻过计算机行业的办公方式，但亲眼看见却又是另外一种感觉了。实习是从6月4日开始的，到了boss便让我去了解一下人脸识别和神经网络方面的东西，特别指出了Faster R-CNN什么的，当然至今还是云里雾里。</p>
+<p>既然老板让我去看，我便花了一个早上去看这是个什么东西。<br>要了解Faster R-CNN,还是要从图像识别和分类技术发展的祖先一步步来：<br><strong>CNN→R-CNN→Fast R-CNN→Faster R-CNN</strong></p>
+<h2 id="一些神经网络"><a href="#一些神经网络" class="headerlink" title="一些神经网络"></a>一些神经网络</h2><h3 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h3><p>CNN(ConvNet/卷积神经网络)是图像识别的初代算法，主要操作有以下几个，若想详细的了解，可以直接拉到最下看参考.<br>在我这个只了解一下理论暂不实践的半吊子看来主要有以下几步</p>
+<ul>
+<li><strong>卷积</strong> 也就是用不同滤波器对图像进行特征提取<img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000428.gif" alt="None"></li>
+<li><strong>ReLU</strong> ReLU很操作很容易理解 就是把图像里面的每个像素的值范围进行再一次的框定 但是为什么要这么操作我至今也是一知半解</li>
+<li><strong>池化</strong> 我的理解是对上一个卷积层的图像进行Downscale<img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000459.png" alt></li>
+<li><strong>全连接层/多层感知器</strong> 组合多个层获得神经网络，这块是我最不懂的，至今毫无头绪</li>
+<li><strong>无尽重复！</strong></li>
+</ul>
+<h3 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h3><p>R是Regions，从现在开始我们不仅可以知道这图片有啥，更能知道图片里面的东西位置在哪里了。<br>那么是如何做到的呢？</p>
+<ul>
+<li><strong>寻找候选框</strong> 对图片进行滑动窗口操作获得潜在的正确答案</li>
+<li><strong>CNN</strong> 输入CNN神经网络，得到输出</li>
+<li><strong>分类与边界回归</strong> 先得到正确的区域，显然正确答案会有很多种，所以我们需要边界回归，得到最终的精确答案<br><img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0614/RCNN.png" alt></li>
+</ul>
+<p>事情很显然了，这样既浪费空间又浪费时间又浪费算力。</p>
+<h3 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h3><p>其实这之前还有个SSP-Net，优点 1.多尺度输入图像 2.一次CNN，然后再去找正确答案。<br>然后整合了一些流程，具体的我也并没有非常明白，因为没有用tensorflow实实在在造过这个轮子。</p>
+<h3 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h3><p>速度的问题其实还是在于选框上，所以干脆把选框也交给CNN，这就是Faster R-CNN了</p>
+<h3 id="MTCNN"><a href="#MTCNN" class="headerlink" title="MTCNN"></a>MTCNN</h3><p>但是我要做的是人脸检测，目前人脸检测用的最多的还是MTCNN(OpenFace,FaceNet),和前面几个算法对于人脸进行了再次优化，算法流程如下。<img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0614/20170817161936858.jpg" alt></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>这便是我实习第一天看的东西了。<br>但是呢理解往往是相对容易的，但操作起来是举步维艰的。<br>如果是从头造轮子，我的数学以及编程功力都没到位，希望能在两年后的现在有这个能力吧。<br>因此我决定识别和模型搭建这块先用谷歌开源的FaceNet以及其提供的预处理算法开完成老板给我的任务，老板也表示了同意。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献:"></a>参考文献:</h2><p>1.<a href="https://blog.csdn.net/ruiyiin/article/details/77113973" target="_blank" rel="noopener">见过最好的神经网络CNN解释</a><br>2.<a href="https://blog.csdn.net/xyfengbo/article/details/70227173" target="_blank" rel="noopener">RCNN介绍</a><br>3.<a href="https://www.cnblogs.com/skyfsm/p/6806246.html" target="_blank" rel="noopener">基于深度学习的目标检测技术演进：R-CNN、Fast R-CNN、Faster R-CNN</a><br>4.<a href="https://blog.csdn.net/tinyzhao/article/details/53236191" target="_blank" rel="noopener">人脸检测：MTCNN</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://breakertt.moe/2018/06/07/face_recognition_01/" data-id="ck7qyi96u0005s0d27szshuzd" data-title="人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/06/19/face_recognition_02/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          FaceNet使用记录 - 我的人脸识别学习笔记02
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Media/">Media</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/MiuNottingham/">MiuNottingham</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFmpeg/">FFmpeg</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Network/">Network</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Proxy/">Proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VideoTech/">VideoTech</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/人脸识别/">人脸识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机视觉/">计算机视觉</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/FFmpeg/" style="font-size: 10px;">FFmpeg</a> <a href="/tags/Network/" style="font-size: 13.33px;">Network</a> <a href="/tags/Proxy/" style="font-size: 13.33px;">Proxy</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/VideoTech/" style="font-size: 10px;">VideoTech</a> <a href="/tags/人脸识别/" style="font-size: 16.67px;">人脸识别</a> <a href="/tags/计算机视觉/" style="font-size: 20px;">计算机视觉</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/08/20/baidupcsgo-web-proxy/">Baidupcs-web 在 apache2 上的反向代理配置</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/20/clash_gateway/">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/encoded_subtitle/">使用AegiSub和FFmpeg为视频打上字幕(啊？Pr是什么？)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/14/lisense_plate_recognition/">车牌识别</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/02/miunottingham_logos_gzh/">宁诺公众号大全</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Breakertt<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
