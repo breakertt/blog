@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>使用 VPS 把 HE IPv6 地址 WireGuard 分配给 Windows 客户端使用 | Breakertt Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/ico" href="/img/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png"><link rel="icon" typt="image/png" sizes="192x192" href="/img/favicon/android-chrome-192x192.png"><link rel="icon" typt="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png"><link rel="icon" typt="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"><link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/atom-one-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/atom-one-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Breakertt Blog"><meta name="msapplication-starturl" content="https://breakertt.moe"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Breakertt Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="使用 VPS 把 HE IPv6 地址 WireGuard 分配给 Windows 客户端使用 | Breakertt Blog"><meta property="og:site_name" content="Breakertt Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://breakertt.moe/2018/10/14/hev6_wireguard/"><meta property="og:locale" content="zh-CN"><meta name="description" content="把 HE 给你的 IPv6 通过 VPS 带回家吧！ - Breakertt - Breakertt Blog"><meta name="keywords" content="Linux"><meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314132717.png"><meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314142004.png"><meta property="article:published_time" content="2018-10-14T04:28:30.000Z"><meta property="article:modified_time" content="2020-03-14T14:40:11.840Z"><meta property="og:updated_time" content="2020-03-14T14:40:11.840Z"><meta property="article:author" content="Breakertt"><meta property="article:tag" content="Linux"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314132717.png">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://breakertt.moe/2018/10/14/hev6_wireguard/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160680873-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-160680873-1');
+</script>
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://breakertt.moe/2018/10/14/hev6_wireguard/",
+    "@type": "BlogPosting",
+    "logo": "https://breakertt.moe/img/favicon/android-chrome-192x192.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breakertt.moe/2018/10/14/hev6_wireguard/"
+    },
+    "headline": "使用 VPS 把 HE IPv6 地址 WireGuard 分配给 Windows 客户端使用 | Breakertt Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314132717.png"
+    },
+    
+    "datePublished": "2018-10-14T04:28:30.000Z",
+    "dateModified": "2020-03-14T14:40:11.840Z",
+    "author": {
+        "@type": "Person",
+        "name": "Breakertt",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://breakertt.moe/img/default_avatar.png"
+        },
+        "description": "一起实现梦想的故事!"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Breakertt Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://breakertt.moe/img/favicon/android-chrome-192x192.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://breakertt.moe/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Linux",
+    "description": "把 HE 给你的 IPv6 通过 VPS 带回家吧！ - Breakertt - Breakertt Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Breakertt Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                一起实现梦想的故事!
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/tags/" class="navbar-link">标签</a>
+    
+        <a href="/links/" class="navbar-link">友链</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Breakertt Blog&url=https://breakertt.moe&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://breakertt.moe&text=使用 VPS 把 HE IPv6 地址 WireGuard 分配给 Windows 客户端使用" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB3klEQVR42u3aS26EMBREUfa/6WSSQdSyq8q0B6a4TFoiAQ6Ssd/H18+BxwUKFChQA9QljuGFf+fV7+j65DmgelDJw0c3H93D3U+dB9WF+nzY53k32Ef3UfcbvTSo96DUwHcfCShQw39eGOhuggX1HpRcKCeT4wykXmRLlADqeJQK6Hf+bstmQB2NShbXZEJNE4UtVRdQR6OSZNRNnC65SBZsUH2o2WBWC6sqdMxeWBXlQPWg3OKZoFWyqhIIUL0oV5R3iYH6MNwBqgvlEswk8E8CwajYBqoC5RZYd84t2MlHAKoL5YL9pOmdNMOjRhSoClTadEyCtzQAXOo4gHok6s4mmlkQlxRI4uI+qMeikgTUPdgB3EcAqgs1A60Av2kegepFqUGoBuzda2whFtQjUXcGsSpoJAHiNJEFVYFyC+ydDV4rTQNQ3aiksZ0WLlwDcmu3HdSxqLQZ6RbdpHD21dcH6nhU+nDXKHLFD1VYA9WDWt0omEymSUNp6+ZTUEehok0M4aB2zXK72QJUDUoFebZ4GsDSQA9UFyrZSJNu6FpZlG1jG9QrULLwJZKKpd2LoF6DcgUN14iUfwdVhUoKFqvJZTrBgupDJYULt3nLNYtUEgGqC3XSAQoUKFD/jl9TWSCftc8CqQAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+            <div class="card-image lazyload" data-bg="url('https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314132717.png')"></div>
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">使用 VPS 把 HE IPv6 地址 WireGuard 分配给 Windows 客户端使用</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Breakertt's Avatar">
+        <span>2018-10-14</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/Network/">Network</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=使用 VPS 把 HE IPv6 地址 WireGuard 分配给 Windows 客户端使用&url=https://breakertt.moe/2018/10/14/hev6_wireguard/&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://breakertt.moe/2018/10/14/hev6_wireguard/&text=Breakertt Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB3klEQVR42u3aS26EMBREUfa/6WSSQdSyq8q0B6a4TFoiAQ6Ssd/H18+BxwUKFChQA9QljuGFf+fV7+j65DmgelDJw0c3H93D3U+dB9WF+nzY53k32Ef3UfcbvTSo96DUwHcfCShQw39eGOhuggX1HpRcKCeT4wykXmRLlADqeJQK6Hf+bstmQB2NShbXZEJNE4UtVRdQR6OSZNRNnC65SBZsUH2o2WBWC6sqdMxeWBXlQPWg3OKZoFWyqhIIUL0oV5R3iYH6MNwBqgvlEswk8E8CwajYBqoC5RZYd84t2MlHAKoL5YL9pOmdNMOjRhSoClTadEyCtzQAXOo4gHok6s4mmlkQlxRI4uI+qMeikgTUPdgB3EcAqgs1A60Av2kegepFqUGoBuzda2whFtQjUXcGsSpoJAHiNJEFVYFyC+ydDV4rTQNQ3aiksZ0WLlwDcmu3HdSxqLQZ6RbdpHD21dcH6nhU+nDXKHLFD1VYA9WDWt0omEymSUNp6+ZTUEehok0M4aB2zXK72QJUDUoFebZ4GsDSQA9UFyrZSJNu6FpZlG1jG9QrULLwJZKKpd2LoF6DcgUN14iUfwdVhUoKFqvJZTrBgupDJYULt3nLNYtUEgGqC3XSAQoUKFD/jl9TWSCftc8CqQAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                    <article id="post-content">
+                        <p>把 HE 给你的 IPv6 通过 VPS 带回家吧！</p>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近呢，发现自己其实对网络一窍不通。之前玩了很久的应用层和传输层，但是对网络层和接口着实是捉襟见肘。前两天看到了 Dr.Cai 发的<a href="https://www.91yunbbs.com/discussion/641/drcais-noob-bgplayer-in-1hour-绝赞速成班-逃#latest" target="_blank" rel="noopener">BGP速成</a>，打算也来搞个玩玩。</p>
+<p>但是我的想法是，并没有要一下去就去上 BGP 玩，正好 HE 的 6in4 隧道会分配一个 /64 甚至是 /48 的 v6 段，那不如先拿这个来玩玩。搞定了这个再去搞那些和 BGP 有关系的广播等高级操作。</p>
+<p>不过要说一句的是，本人目前在墙外，国内我不知道是否可以这样搞！</p>
+<h2 id="注册-tunnelbroker"><a href="#注册-tunnelbroker" class="headerlink" title="注册 tunnelbroker"></a>注册 tunnelbroker</h2><p>这个有很多博文讲过如何操作了，就不赘述了,可以参考<a href="https://www.91yunbbs.com/discussion/549/让affman失业系列菜鸟教学-第一篇-用6in4-隧道来替代-socks5代理" target="_blank" rel="noopener">这篇</a>。</p>
+<h2 id="VPS-CentOS-7-配置-IPv6-隧道"><a href="#VPS-CentOS-7-配置-IPv6-隧道" class="headerlink" title="VPS(CentOS 7) 配置 IPv6 隧道"></a>VPS(CentOS 7) 配置 IPv6 隧道</h2><h3 id="解除-IPv6-限制（可选）"><a href="#解除-IPv6-限制（可选）" class="headerlink" title="解除 IPv6 限制（可选）"></a>解除 IPv6 限制（可选）</h3><p>这里我们要在<code>/etc/sysctl.conf</code>加入这几行。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">net.ipv6.conf.all.disable_ipv6 &#x3D; 0</span><br><span class="line">net.ipv6.conf.default.disable_ipv6 &#x3D; 0</span><br><span class="line">net.ipv6.conf.lo.disable_ipv6 &#x3D; 0</span><br></pre></td></tr></table></figure>
+<h3 id="设置隧道用的-interface"><a href="#设置隧道用的-interface" class="headerlink" title="设置隧道用的 interface"></a>设置隧道用的 interface</h3><p>新建<code>/etc/sysconfig/network-scripts/ifcfg-sit1</code>，编辑如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DEVICE&#x3D;sit1</span><br><span class="line">BOOTPROTO&#x3D;none</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line">IPV6INIT&#x3D;yes</span><br><span class="line">IPV6TUNNELIPV4&#x3D;&lt;Remote IPv4&gt;</span><br><span class="line">IPV6TUNNELIPV4LOCAL&#x3D;&lt;Local(VPS) IPv4&gt;</span><br><span class="line">IPV6ADDR&#x3D;&lt;Client IPv6(with mask)&gt;</span><br><span class="line">IPV6_DEFAULTGW&#x3D;&lt;Server IPv4(without mask)&gt;</span><br></pre></td></tr></table></figure>
+<p>这边再提供一个虚拟样例：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">DEVICE&#x3D;sit1</span><br><span class="line">BOOTPROTO&#x3D;none</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line">IPV6INIT&#x3D;yes</span><br><span class="line">IPV6TUNNELIPV4&#x3D;216.66.88.98</span><br><span class="line">IPV6TUNNELIPV4LOCAL&#x3D;185.177.111.111</span><br><span class="line">IPV6ADDR&#x3D;2001:470:1111:510::2&#x2F;64</span><br><span class="line">IPV6_DEFAULTGW&#x3D;2001:470:1111:510::1</span><br></pre></td></tr></table></figure></p>
+<p>如果本机没有原生 IPv6 的话，我们就可以在这里<code>ifup sit1</code>，然后 <code>curl http://v6.ipv6-test.com/api/myip.php</code> 看看自己的 v6 是否已经通了。<br>如果有原生 IPv6 的话，看一下后面我的解决。</p>
+<h3 id="原生-v6-的追加配置"><a href="#原生-v6-的追加配置" class="headerlink" title="原生 v6 的追加配置"></a>原生 v6 的追加配置</h3><h4 id="设置默认-v6-出口为-sit1"><a href="#设置默认-v6-出口为-sit1" class="headerlink" title="设置默认 v6 出口为 sit1"></a>设置默认 v6 出口为 sit1</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;etc&#x2F;sysconfig&#x2F;network</span><br><span class="line"></span><br><span class="line">NETWORKING&#x3D;yes</span><br><span class="line">IPV6_DEFAULTDEV&#x3D;sit1</span><br></pre></td></tr></table></figure>
+<p>这边我遇到了一个小坑，我的 VPS 商用了 cloud-init 导致每次重启会重写这个文件，解决方法是运行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">touch &#x2F;etc&#x2F;cloud&#x2F;cloud-init.disabled</span><br></pre></td></tr></table></figure>
+<h3 id="关闭原生-interface-的-v6-功能"><a href="#关闭原生-interface-的-v6-功能" class="headerlink" title="关闭原生 interface 的 v6 功能"></a>关闭原生 interface 的 v6 功能</h3><p>在 <code>/etc/sysctl.conf</code> 中加入 <code>net.ipv6.conf.&lt;your default interface&gt;.disable_ipv6 = 1</code> 也许是个不错的办法。</p>
+<h2 id="配置WireGuard"><a href="#配置WireGuard" class="headerlink" title="配置WireGuard"></a>配置WireGuard</h2><h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><h4 id="一键安装"><a href="#一键安装" class="headerlink" title="一键安装"></a>一键安装</h4><p>这边我们就先直接用一键脚本进行 WireGurad 的安装，执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;atrandys&#x2F;wireguard&#x2F;master&#x2F;wireguard_install.sh &amp;&amp; chmod +x wireguard_install.sh &amp;&amp; .&#x2F;wireguard_install.sh</span><br></pre></td></tr></table></figure>
+<p>如果要换内核的话请先换内核在进行安装。</p>
+<p>这个脚本自动配置了客户端和服务端的密码以及配置，讲道理是可以直接用的，但是这并不是我们想要的。我们这边只是要本地分配到 IPv6 然后 v6 地址通过 WireGuard 访问，所以还要进一步配置。</p>
+<p>首先我们启用一波自动 WireGuard 的自动开机啥的：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">systemctl enable wg-quick@wg0.service ### 自动开机</span><br><span class="line">systemctl start wg-quick@wg0.service  ### 起一下服务看看能不能跑</span><br><span class="line">systemctl stop wg-quick@wg0.service   ### 停掉，开始配置</span><br></pre></td></tr></table></figure>
+<h4 id="编辑-wg0-conf"><a href="#编辑-wg0-conf" class="headerlink" title="编辑 wg0.conf"></a>编辑 <code>wg0.conf</code></h4><p>编辑 <code>/etc/wireguard/wg0.conf</code> 为如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Interface]</span><br><span class="line">Address &#x3D; 10.0.0.1&#x2F;24</span><br><span class="line">MTU &#x3D; 1420</span><br><span class="line">SaveConfig &#x3D; false</span><br><span class="line">PostUp &#x3D; iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o net0 -j MASQUERADE</span><br><span class="line">PostDown &#x3D; iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o net0 -j MASQUERADE</span><br><span class="line">ListenPort &#x3D; 56056</span><br><span class="line">PrivateKey &#x3D; &lt;&gt;</span><br><span class="line"></span><br><span class="line">[Peer]</span><br><span class="line">PublicKey &#x3D; &lt;&gt;</span><br><span class="line">AllowedIPs &#x3D; 10.0.0.2&#x2F;32, 2001:470:1111:510::1&#x2F;128</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314142004.png" alt=""></p>
+<p>这里的地址前缀中取一个地址出来写到 AllowedIPs 里面，因为我们就用一台电脑登陆，<code>::1/128</code> 就是个不错的选择。至于 PublicKey 和 PrivateKey 就按照原来就好。</p>
+<p>然后我们就可以用 <code>wg-quick up wg0</code> 来暂时开启 WireGuard 服务并配置客户端。</p>
+<h3 id="Windows-客户端"><a href="#Windows-客户端" class="headerlink" title="Windows 客户端"></a>Windows 客户端</h3><p>这边我选择了 TunSafe 作为我的客户端，下载地址：<a href="https://tunsafe.com/download" target="_blank" rel="noopener">https://tunsafe.com/download</a> 。</p>
+<p>安装完成之后，我们点一下主界面的 Edit Config，然后先把服务器端自动生成在 <code>/etc/wireguard/client.conf</code> 中的内容拷贝过来。</p>
+<p>然后，把 <code>Interface</code> 中的 <code>Address</code> 改为 <code>10.0.0.2/32, &lt;Routed /64&gt;::1/128</code> ; <code>Peer</code> 中的 <code>AllowedIPs</code> 改为 <code>10.0.0.2/24, ::0/0</code>, 这样的话我们 v4 除了 WireGuard 内网都走本地， v6 全部走 WireGuard。</p>
+<p>最终配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[Interface]</span><br><span class="line">PrivateKey &#x3D; &lt;&gt;</span><br><span class="line">Address &#x3D; 10.0.0.2&#x2F;32, 2001:470:1111:510::1&#x2F;128</span><br><span class="line">DNS &#x3D; 8.8.8.8</span><br><span class="line">MTU &#x3D; 1420</span><br><span class="line"></span><br><span class="line">[Peer]</span><br><span class="line">PublicKey &#x3D; &lt;&gt;</span><br><span class="line">Endpoint &#x3D; 185.177.111.111:56056</span><br><span class="line">AllowedIPs &#x3D; 10.0.0.2&#x2F;24, ::0&#x2F;0</span><br><span class="line">PersistentKeepalive &#x3D; 25</span><br></pre></td></tr></table></figure>
+<p>然后尝试链接，用浏览器打开 <code>https://ipv6-test.com/</code> 看看有没有得到自己的 v6 段下的地址。</p>
+<h3 id="收尾工作"><a href="#收尾工作" class="headerlink" title="收尾工作"></a>收尾工作</h3><p>在服务端运行如下脚本，进行长期运行：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wg-quick up wg0 ### 关闭临时服务</span><br><span class="line">systemctl start wg-quick@wg0.service  ### 开启守护服务</span><br></pre></td></tr></table></figure>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>之后的打算还有不少，就先把 flag 立起来吧。</p>
+<ul>
+<li>给 R6300v2 安装 OpenWrt 并用 WireGuard 分配整个网段的 IPv6 给本地局域网的设备</li>
+<li>找一种比 WireGuard 更好的组网方式（可以透过GFW)</li>
+<li>注册ASN，宣告自己的 IP 地址并用之前的方法把这些 IP 带回家</li>
+</ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="https://askubuntu.com/questions/539277/how-to-get-rid-of-cloud-init" target="_blank" rel="noopener">how-to-get-rid-of-cloud-init</a></li>
+<li><a href="https://eddyemma.com/blog/2018/08/26/科学上网指南-wireguard/" target="_blank" rel="noopener">科学上网指南(10)——wireguard</a></li>
+<li><a href="https://blog.ni-co.moe/public/571.html" target="_blank" rel="noopener">将宣告的 subnet 通过 wireguard 分配给客户端使用</a></li>
+<li><a href="https://kotori.net/2018/10/21/centos-%E5%AE%89%E8%A3%85%E6%9C%80%E6%96%B0%E7%89%88%E7%9A%84wireguard/" target="_blank" rel="noopener">CentOS 安装最新版的Wireguard</a></li>
+<li><a href="https://www.atrandys.com/2018/886.html" target="_blank" rel="noopener">CentOS7一键脚本安装WireGuard
+</a></li>
+</ol>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2020-03-14");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2018-10-14T04:28:30.000Z" itemprop="datePublished">2018-10-14</time>
+
+    , 最后修改于&nbsp;<time datetime="2020-03-14T14:40:11.840Z" itemprop="dateModified">2020-03-14</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/Network/'>Network</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Linux/" rel="tag">#&nbsp;Linux</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2018/10/14/lisense_plate_recognition/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">车牌识别</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2018/07/02/miunottingham_logos_gzh/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">宁诺公众号大全</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+
+<div class="btn_click_load"> 
+    <button id="disqus_click_btn" class="btn">阅读评论（请确保 disqus 可以正常加载）</button>
+</div>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://breakertt.moe/2018/10/14/hev6_wireguard/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://breakertt.moe/2018/10/14/hev6_wireguard/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script id="disqus-lazy-load-script">
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://disqus.com/next/config.json', true);
+    xhr.timeout = 4000;
+    xhr.send();
+    xhr.onload = function() {
+        if(this.status == 200||this.status == 304){
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//breakertt-moe.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+            document.getElementById('disqus_click_btn').setAttribute("style", "display:none")
+        }
+    };
+    xhr.ontimeout = function(e) {
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:block");
+    };
+    xhr.onerror = function(e) {
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:block");
+    };
+    document.getElementById('disqus_click_btn').onclick=function() { //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//breakertt-moe.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:none")
+    };
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://breakertt.moe">Breakertt Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2018;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
