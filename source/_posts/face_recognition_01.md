@@ -1,10 +1,10 @@
 title: 人脸识别的神经网络了解一下啦 - 我的人脸识别学习笔记01
 date: 2018/6/7 14:16:50
 categories:
-- 编程
+- AI
 tags:
-- 人脸识别
-- 计算机视觉
+- Face Recognition
+- Computer Vision
 thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000321.png
 toc: true
 ---

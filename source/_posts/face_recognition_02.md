@@ -1,10 +1,10 @@
 title: FaceNet使用记录 - 我的人脸识别学习笔记02
 date: 2018/6/19 11:30:30
 categories:
-- 编程
+- AI
 tags:
-- 人脸识别
-- 计算机视觉
+- Face Recognition
+- Computer Vision
 - Python
 thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000042.png
 toc: true

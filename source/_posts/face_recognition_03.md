@@ -1,11 +1,11 @@
 title: 魔改(二次开发)FaceNet为己用 - 我的人脸识别学习笔记03 - 完结篇
 date: 2018/6/22 17:28:30
 categories:
-- 编程
+- AI
 tags:
-- 人脸识别
+- Face Recognition
+- Computer Vision
 - Python
-- 计算机视觉
 thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0621/0621bg_output.jpg
 toc: true
 ---

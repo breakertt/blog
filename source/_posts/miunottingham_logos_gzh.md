@@ -1,9 +1,10 @@
 title: 宁诺公众号大全
 date: 2018/7/02 10:28:30
 categories:
-- MiuNottingham
+- Media
 tags:
 - Python
+- UNNC
 thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/0702/merged_blur.jpg
 toc: true
 ---

@@ -1,9 +1,9 @@
 title: 车牌识别
 date: 2018/10/14 12:28:30
 categories:
-- 编程
+- AI
 tags:
-- 计算机视觉
+- Computer Vision
 - Python
 thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/2018/1014/1014bg_output.jpg
 toc: true

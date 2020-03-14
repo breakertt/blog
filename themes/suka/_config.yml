@@ -92,18 +92,20 @@ nav:
     use: true
   archives:
     use: true
-  rss:
-    use: false
-  share:
-    use: true
   search:
     use: true
     link: /search
+  rss:
+    use: false
   pages:
-    关于我:
-      link: /about/
-    朋友们:
+    标签:
+      link: /tags/
+    友链:
       link: /links/
+  share:
+    use: true
+
+
 
 # SNS Share Switch
 # Used to choose which items will be displayed in share menu.
