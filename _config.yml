@@ -103,3 +103,7 @@ deploy:
 # Aplayer
 aplayer:
   meting: true
+
+# Sitemap
+sitemap:
+    path: sitemap.xml
