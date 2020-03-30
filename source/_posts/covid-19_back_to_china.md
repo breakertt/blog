@@ -20,6 +20,10 @@ thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.
 
 ## 转机
 
+__详情请询问自己的航司！！！__
+
+[我是一名英国留学研究生，鉴于英国现在的疫情情况我该不该回国？ - Ruoning的回答 - 知乎](https://www.zhihu.com/question/378703024/answer/1079851308)
+
 ![](https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200316161326.png)
 
 ## 到国内

@@ -47,7 +47,7 @@ IPV6INIT=yes
 IPV6TUNNELIPV4=<Remote IPv4>
 IPV6TUNNELIPV4LOCAL=<Local(VPS) IPv4>
 IPV6ADDR=<Client IPv6(with mask)>
-IPV6_DEFAULTGW=<Server IPv4(without mask)>
+IPV6_DEFAULTGW=<Server IPv6(without mask)>
 ```
 
 这边再提供一个虚拟样例：
