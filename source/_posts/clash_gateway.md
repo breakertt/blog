@@ -114,6 +114,7 @@ dns:
 ```
 
 为什么不用fake-ip呢？因为我觉得目前的redir-host方案足够我本人使用了。
+
 ## 国内外分流
 
 clash这个软件的一大特色就是他的分流功能，所以我想还是得用起来，不说好用，至少可以堪用。
@@ -124,33 +125,51 @@ clash这个软件的一大特色就是他的分流功能，所以我想还是得
 
 # 配置iptables转发
 
-这是我们的最后一步，主要是使用iptables配置nat的转发到clash，很大一部分都是参考了
+这是我们的最后一步，主要是使用iptables配置nat的转发到clash，很大一部分都是参考了 [Clash TProxy Mode](https://lancellc.gitbook.io/clash/start-clash/clash-udp-tproxy-support)，不过这里面的规则有问题，会导致 dns 的回环。
 
-[Clash作为透明代理是否有意义？](https://toutyrater.github.io/app/transparent_proxy.html)
-
-[透明代理/路由器翻墙· V2Ray 配置指南|V2Ray 白话文教程
-](https://github.com/Dreamacro/clash/issues/158)
-
-这两篇文章，最后得出的规则如下，这个规则网关本身是不走代理的，反正我可以用proxychains-ng对本级进行代理：
+最后修复后的规则如下，这个规则网关本身是不走代理的，反正我可以用 proxychains-ng 对本机进行代理：
 
 ```
 iptables -t nat -N clash
+iptables -t nat -A clash -d 0.0.0.0/8 -j RETURN
+iptables -t nat -A clash -d 10.0.0.0/8 -j RETURN
+iptables -t nat -A clash -d 127.0.0.0/8 -j RETURN
+iptables -t nat -A clash -d 169.254.0.0/16 -j RETURN
+iptables -t nat -A clash -d 172.16.0.0/12 -j RETURN
 iptables -t nat -A clash -d 192.168.0.0/16 -j RETURN
-iptables -t nat -A clash -p tcp -j RETURN -m mark --mark 0xff
-iptables -t nat -A clash -p tcp -j REDIRECT --to-ports 7892
+iptables -t nat -A clash -d 224.0.0.0/4 -j RETURN
+iptables -t nat -A clash -d 240.0.0.0/4 -j RETURN
+iptables -t nat -A clash -d <local host ip> -j RETURN
+iptables -t nat -A clash -p tcp -j REDIRECT --to-port 7892
+iptables -t nat -I PREROUTING -p tcp -d 8.8.8.8 -j REDIRECT --to-port 7892
+iptables -t nat -I PREROUTING -p tcp -d 8.8.4.4 -j REDIRECT --to-port 7892
 iptables -t nat -A PREROUTING -p tcp -j clash
+
+ip rule add fwmark 1 table 100
+ip route add local default dev lo table 100
+iptables -t mangle -N clash
+iptables -t mangle -A clash -d 0.0.0.0/8 -j RETURN
+iptables -t mangle -A clash -d 10.0.0.0/8 -j RETURN
+iptables -t mangle -A clash -d 127.0.0.0/8 -j RETURN
+iptables -t mangle -A clash -d 169.254.0.0/16 -j RETURN
+iptables -t mangle -A clash -d 172.16.0.0/12 -j RETURN
+iptables -t mangle -A clash -d 192.168.0.0/16 -j RETURN
+iptables -t mangle -A clash -d 224.0.0.0/4 -j RETURN
+iptables -t mangle -A clash -d 240.0.0.0/4 -j RETURN
+iptables -t mangle -A clash -d <local host ip> -j RETURN
+iptables -t mangle -A clash -p udp -j TPROXY --on-port 7892 --tproxy-mark 1
+iptables -t mangle -A PREROUTING -p udp -j clash
 ```
 
 当然我们还不希望这些规则重启就没，那么我们就需要安装一些辅助工具来持久化iptables的规则：
 
 ```shell
 sudo apt install iptables-persistent netfilter-persistent
-netfilter-persistent save
-netfilter-persistent start
-iptables-save  > /etc/iptables/rules.v4
+sudo netfilter-persistent save
+sudo netfilter-persistent reload
 ```
 
-具体可以看这里：[Iptables reload/restart on Ubuntu 18.04](https://askubuntu.com/questions/1052919/iptables-reload-restart-on-ubuntu-18-04)
+具体可以看这里：[how-to-save-rules-of-the-iptables](https://askubuntu.com/questions/119393/how-to-save-rules-of-the-iptables)
 
 # 尾声
 
