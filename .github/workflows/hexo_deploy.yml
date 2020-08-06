@@ -27,7 +27,12 @@ jobs:
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm ci
-    
+      
+    - name: sukka theme
+      run: |
+        cd themes/suka
+        npm i --production
+
     # Deploy hexo blog website.
     - name: Deploy
       id: deploy
