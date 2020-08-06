@@ -1,6 +1,9 @@
-name: Deploy
+name: Hexo Deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      - hexo  # trigger branch
 
 jobs:
   build:
