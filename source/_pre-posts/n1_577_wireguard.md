@@ -1,5 +1,5 @@
-title:（施工中）给 Phicomm N1 (Armbian 5.77) 安装 WireGuard
-date: 2020/12/8 16:10:00
+title: （施工中）给 Phicomm N1 (Armbian 5.77) 安装 WireGuard
+date: 2020/12/08 16:10:00
 categories:
 - Linux
 tags:

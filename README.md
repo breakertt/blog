@@ -1,6 +1,6 @@
-# imaginebreake.github.io
+# breakertt.github.io/blog | blog.breakertt.moe
 
-迁移事项
+How to serve offline:
 ```
 npm install
 npm install hexo-deployer-git --save
