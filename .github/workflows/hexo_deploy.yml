@@ -17,7 +17,7 @@ jobs:
           
     - name: sukka theme
       run: |
-        cd themes/suka
+        cd themes/suka-old
         npm i --production
 
     # Caching dependencies to speed up workflows. (GitHub will remove any cache entries that have not been accessed in over 7 days.)
