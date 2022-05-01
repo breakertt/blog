@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>A review on papers of RowHammer, Specture and HeartBleed | Breakertt Blog</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/ico" href="/img/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png"><link rel="icon" typt="image/png" sizes="192x192" href="/img/favicon/android-chrome-192x192.png"><link rel="icon" typt="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png"><link rel="icon" typt="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"><link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/atom-one-light.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/atom-one-light.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Breakertt Blog"><meta name="msapplication-starturl" content="https://breakertt.moe"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Breakertt Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="A review on papers of RowHammer, Specture and HeartBleed | Breakertt Blog"><meta property="og:site_name" content="Breakertt Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://breakertt.moe/2019/08/20/sidechannel/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Litrature review on RowHammer, Specture and HeartBleed - Breakertt - Breakertt Blog"><meta name="keywords" content="Security, Research"><meta property="article:published_time" content="2019-08-20T08:10:00.000Z"><meta property="article:modified_time" content="2022-05-01T13:56:21.261Z"><meta property="og:updated_time" content="2022-05-01T13:56:21.261Z"><meta property="article:author" content="Breakertt"><meta property="article:tag" content="Security, Research"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="https://breakertt.moe/2019/08/20/sidechannel/">
+
+    <meta name="generator" content="Hexo 4.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-160680873-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-160680873-1');
+</script>
+
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "https://breakertt.moe/2019/08/20/sidechannel/",
+    "@type": "BlogPosting",
+    "logo": "https://breakertt.moe/img/favicon/android-chrome-192x192.png",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://breakertt.moe/2019/08/20/sidechannel/"
+    },
+    "headline": "A review on papers of RowHammer, Specture and HeartBleed | Breakertt Blog",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://breakertt.moe/img/favicon/android-chrome-192x192.png"
+    },
+    
+    "datePublished": "2019-08-20T08:10:00.000Z",
+    "dateModified": "2022-05-01T13:56:21.261Z",
+    "author": {
+        "@type": "Person",
+        "name": "Breakertt",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://breakertt.moe/img/default_avatar.png"
+        },
+        "description": "一起实现梦想的故事!"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Breakertt Blog",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://breakertt.moe/img/favicon/android-chrome-192x192.png"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://breakertt.moe/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "Security, Research",
+    "description": "Litrature review on RowHammer, Specture and HeartBleed - Breakertt - Breakertt Blog"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Breakertt Blog</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                一起实现梦想的故事!
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">首页</a>
+    
+    
+        <a href="/archives/" class="navbar-link">归档</a>
+    
+    
+        <a href="/search" class="navbar-link">搜索</a>
+    
+    
+        <a href="/tags/" class="navbar-link">标签</a>
+    
+        <a href="/links/" class="navbar-link">友链</a>
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">分享</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Breakertt Blog&url=https://breakertt.moe&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+
+        <!-- Share Google+ -->
+        
+
+        <!-- Share LinkedIn -->
+        
+
+        <!-- Share QQ -->
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=https://breakertt.moe&text=A review on papers of RowHammer, Specture and HeartBleed" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB2ElEQVR42u3aQYrEMAxE0dz/0jPboZGqvk0abE1lE+gO8QsojiX5+TnweIIKKqigCtQjjuqa9obF/9092nGCGoPqBlEDVtdU56VxghqF+gy86kyhVSC7cYL6n6iVF+MTHlRQLuDdxzuooLrArW5SQUiAv7ZKCOp4lAreN8+vZTNBHY2yRQfwInQP+LWqS1BHo1QgdjACUZNum3QENQ6lfnMAtcDr/rNFs6CuRNFFGflok6JZhw5qDkphXAC7wKUPF9RclALRpLS7Tn2kg5qFciDaBHITqAr4oOahSECuvADk3iU0qBEoB5DJowl0l5iiDThBXYdyySZpdqvFncPYQmxQ16FWN2+54uxuczKoOSi66U8BXOFCFVJwxyGoa1Co6G4KrDYhAJNtULNQpHBKC//dhEwm56DmoHYa0WpxRxqZeANOUFeiVHCqxeBOEUM+UFDjUDQ4aWKqCiBBzUetFMFI4KKNga6LFdSVKPrhJRMr3XSBG0ZBXYnaCUiyQKQbo3GGHNRVKPLBJYUy+lIsVYeDuhZFBrTJpNmos1V1CWosSn18SWP7K4Ee1LUo0mh0mwFJohvULJRrXi9NgqCgFtRslBqQFlRXm5clPqgRqJOOoIIKKqg/xy/gYe/P029MJAAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">A review on papers of RowHammer, Specture and HeartBleed</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Breakertt's Avatar">
+        <span>2019-08-20</span>
+        
+            <span class="suka-devide-dot"></span>
+            <a class="category-link" href="/categories/PaperReview/">PaperReview</a>
+        
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">分享本文</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=A review on papers of RowHammer, Specture and HeartBleed&url=https://breakertt.moe/2019/08/20/sidechannel/&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=https://breakertt.moe/2019/08/20/sidechannel/&text=Breakertt Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB2ElEQVR42u3aQYrEMAxE0dz/0jPboZGqvk0abE1lE+gO8QsojiX5+TnweIIKKqigCtQjjuqa9obF/9092nGCGoPqBlEDVtdU56VxghqF+gy86kyhVSC7cYL6n6iVF+MTHlRQLuDdxzuooLrArW5SQUiAv7ZKCOp4lAreN8+vZTNBHY2yRQfwInQP+LWqS1BHo1QgdjACUZNum3QENQ6lfnMAtcDr/rNFs6CuRNFFGflok6JZhw5qDkphXAC7wKUPF9RclALRpLS7Tn2kg5qFciDaBHITqAr4oOahSECuvADk3iU0qBEoB5DJowl0l5iiDThBXYdyySZpdqvFncPYQmxQ16FWN2+54uxuczKoOSi66U8BXOFCFVJwxyGoa1Co6G4KrDYhAJNtULNQpHBKC//dhEwm56DmoHYa0WpxRxqZeANOUFeiVHCqxeBOEUM+UFDjUDQ4aWKqCiBBzUetFMFI4KKNga6LFdSVKPrhJRMr3XSBG0ZBXYnaCUiyQKQbo3GGHNRVKPLBJYUy+lIsVYeDuhZFBrTJpNmos1V1CWosSn18SWP7K4Ee1LUo0mh0mwFJohvULJRrXi9NgqCgFtRslBqQFlRXm5clPqgRqJOOoIIKKqg/xy/gYe/P029MJAAAAABJRU5ErkJggg==" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                    <article id="post-content">
+                        <p>Litrature review on RowHammer, Specture and HeartBleed</p>
+<a id="more"></a>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><h2 id="Flipping-Bits-in-Memory-Without-Accessing-Them-An-Experimental-Study-of-DRAM-Disturbance-Error"><a href="#Flipping-Bits-in-Memory-Without-Accessing-Them-An-Experimental-Study-of-DRAM-Disturbance-Error" class="headerlink" title="Flipping Bits in Memory Without Accessing Them: An Experimental Study of DRAM Disturbance Error"></a>Flipping Bits in Memory Without Accessing Them: An Experimental Study of DRAM Disturbance Error</h2><p>As the DRAM processing technology continuously evolves, the DRAM cells are considered to be more likely to be interference by other cells. Kim et al. [1] discovered a vulnerability in modern DRAM chips, named Rowhammer attack afterwards. A Rowhammer attack can flipbits in a row on a DRAM chip by frequent accessing another physical adjacent row.</p>
+<p>The authors firstly demonstrated this vulnerability can be easily exploited with a few lines of assembly on a commodity PC. Then in-depth analysis with an FPGA-based testing platform is performed to study behaviour and root cause. It is concluded that most DRAM modules manufactured in 2012 and 2013 are affected and the number of accesses required is relatively small. Finally, a novel mitigation solution is proposed.</p>
+<h2 id="The-Matter-of-Heartbleed"><a href="#The-Matter-of-Heartbleed" class="headerlink" title="The Matter of Heartbleed"></a>The Matter of Heartbleed</h2><p>The Heartbleed vulnerability is a software bug in a widely used and fundamental cryptography library OpenSSL and consequently, is considered to be a serious security issue once disclosed. Based on such a phenomenal vulnerability, the actual impact of the vulnerability and responses from various sides including bug patching, certificaterevoking and attacks before and after disclosure are measured and evaluated in this paper [2]. The investigation shows the impact of this vulnerability is indeed great with massive attacks. Many sites are patched, but most of them are patched incorrectly (no certificate replacement). Additionally, the authors notifiedthe administrators of unpatched services to study the effectiveness of post-disclosure community mitigation measures and it is confirmedto be useful.</p>
+<p>Building upon the previous investigation and experiment, five aspects are discussed with weak- nesses and strengths observed and concrete suggestions.</p>
+<h2 id="Spectre-Attacks-Exploiting-Speculative-Execution"><a href="#Spectre-Attacks-Exploiting-Speculative-Execution" class="headerlink" title="Spectre Attacks: Exploiting Speculative Execution"></a>Spectre Attacks: Exploiting Speculative Execution</h2><p>The Spectre is a well-known side-channel attack proposed by Kocher et al. [3] This attack exploits micro-architectural features including speculative execution, branch prediction and caches which are common in modern computer processors.</p>
+<p>The Spectre attack can be performed in three phases. The branch prediction unit (BPU) is trained maliciously for exploitable instructions to be speculatively executed. Then, the instructions are modifiedto ones perform unexpected accesses and fail the branch condition. The instructions will be executed speculatively with mis-trained processor as a micro-architectural behaviour and leave cache-based covert channels. Then the attacker can retrieve secret data from the channel. Based on this procedure, two variants are discussed where poisons branch predictor and branch target buffer (BTB) respectively.</p>
+<p>It is demonstrated nearly all processor vendors are affected, and the software security systems relying on hardware security guarantees are consequently becoming vulnerable. And various methods are suggested to prevent the Spectre attack.</p>
+<h1 id="Key-Themes"><a href="#Key-Themes" class="headerlink" title="Key Themes"></a>Key Themes</h1><p>A typical structure is observed in these three papers, which study or even reveal famous failures. The vulnerability and the attack around it are explained as a starting point. Then the range and impact of the attack are well studied. Potential solutions are proposed in the end, but to different extents, depending on the nature of vulnerability. It is worth noting that Kim et al. and Kocher et al. attaches more importance to the explanation as they are the papers that reveal the attack, while Durumeric et al. focus on the impact. Under such structure, the reader can obtain a clear understanding of attack strategy and root cause (what), the impact (why) and the solutions (how).</p>
+<p>What the vulnerability is? I would consider all three attacks as side-channel, following the definition in Ross Anderson’s book - “A side channel is where information leaks accidentally via some medium that was not designed or intended for communication”. It may be more intuitive for the Spectre and the Heartbleed as they enable the read privilege for the attacker. Although attacks like the RowHammer don’t leak data directly, an attacker can change the permissions bits in the memory to enable the read privilege. Therefore, the attacker can get control over the system regardless of the direct privilege provided by the attack. However, the nature of the side-channels implied is diverse. The HeartBleed is a pure software bug, the Spectre is a vulnerability on the central hardware unit (CPU), and the RowHammer exploits a relative peripheral hardware unit (Memory Modules).</p>
+<p>Why we should care about this vulnerability? Although all three attacks are famous, the impact varies on factors like exploitation difficulty and influence range. Since the HeartBleed attack is a web software failure, an attacker can exploit it remotely. By contrast, the other two attacks are more challenging to perform as the attacker must run some program on the machine. Furthermore, it is non-trivial to precisely manipulate the adjacent memory rows around the row with critical data with several levels of memory address translation from operating system, memory management unit, etc., making the Rowhammer the most challenging one to exploit. However, the hardware ones may be more severe in terms of influencerange, as the number of vulnerable websites to the HeartBleed is much less than vulnerable processors and memory modules.</p>
+<p>How to Mitigate or Solve it? It is also found that fixing a software-based side-channel like the HeartBleed is the most straightforward. Although there are software techniques to mitigate the hardware-based side-channels, they are not a long-term solution and blur the hardware’s responsibili- ties. Thus, it is essential to solve fundamentally from the hardware side. Unfortunately, It may take months or even years for vendors to re-design and ship. The fact that consumers have little incentive to pay for the newest patched hardware make the patch cycle even longer. It is agreed by the authors of the Spectre and the Rowhammer that hardware vendors must take care of the trade-off between performance and security. However, when considering the fixitself, the low certificaterevocation rate in the HeartBleed case indicated a gap between a patch and a correct patch. Since the level of software users is unaligned, the correct patch rate is significantlylower than the patch rate. Meanwhile, the correct path rate of hardware vulnerability may be higher.</p>
+<p>With intensive comparison among three side-channel attacks, it is interesting that software-based side-channel vulnerability is easy to exploit but quick to patch. However, a hardware one is non-trivial to exploit but leaves long-term pain. Again, it is not practical to determine which one is more severe without a certain threat model.</p>
+<h1 id="Legacy"><a href="#Legacy" class="headerlink" title="Legacy"></a>Legacy</h1><p>(Attack evolution) A clear evolution trend on the hardware side-channel is noticed from the RowHam- mer (2014) to the Spectre (2019), then today (2022). Enhancing existing side-channel attacks are intuitive. There are attempts on extending existing attacks to more platforms and more applications. For example, the Drammer attack [4] demonstrates the possibility of the Rowhammer attack on mobile platforms, and the ZombieLoad attack [5] shows that even enclaves are vulnerable to transient attacks. Efforts are also made to decrease the exploitation difficultyof side-channels by introducing remote execution and automated attack features into the attack. The Rowhammer.js [6] and the NetSpectre [7] are presented as the remote variant of the Rowhammer and the Spectre. The Rowhammer.js attack and the cache templates attacks [8] on cache side-channels can both be performed automatically. Apart from the variants, attacks on different side-channels are continuously disclosed by research community from memory attack like (the RowHammer [1]), to cache attack like Flush-and-Flush [9], then finally, out-of-out execution units for the Meltdown [10] and branch prediction units for Spectre [3] The side-channel is becoming easier to exploit but harder to be solved once-for-all [11]</p>
+<p>(Patch issues) The security community was recently shocked by the disclosure of a bug in log4j, a similar software side-channel to the HeartBleed [2] Systematic risk in the modern software world where software heavily relies on libraries is indicated, thus, bringing the importance of fast reaction ability and prevention mechanisms. Li and Paxson [12] provided valuable suggestions after a large- scale study on the vulnerabilities and corresponding patches of 682 open-source software projects, rather than focusing on only one vulnerability like the Heartbleed. In terms of tools, an Internet-wide scanning tool played a vital role in studying the Heartbleed matter. Later on, Durumeric et al. [13] developed a free and democratized version of this tool to help discover vulnerable web services deployments, significantlyreducing the cost of real-time Internet-wide scan. Another growing concern is overlooking future side-channel variants in mitigation methods (i.e. patches). Canella et al. [11] showed the origin defence methods to the Spectre and the Meltdown can be trivially bypassed with naive variants. Therefore, building a fixingplan and trade-off between quick but weak solutions and slow but robust solutions is essential.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li>Yoongu Kim, Ross Daly, Jeremie Kim, Chris Fallin, Ji Hye Lee, Donghyuk Lee, Chris Wilkerson, Konrad Lai, and Onur Mutlu. Flipping bits in memory without accessing them: An experimental study of DRAM disturbance errors. In 2014 ACM/IEEE 41st International Symposium on Computer Architecture (ISCA), pages 361–372, Minneapolis, MN, USA, June 2014. IEEE.</li>
+<li>Zakir Durumeric, Frank Li, James Kasten, Johanna Amann, Jethro Beekman, Mathias Payer, Nicolas Weaver, David Adrian, Vern Paxson, Michael Bailey, and J. Alex Halderman. The Matter of Heartbleed. In Proceedings of the 2014 Conference on Internet Measurement Conference, pages 475–488, Vancouver BC Canada, November 2014. ACM.</li>
+<li>Paul Kocher, Jann Horn, Anders Fogh, Daniel Genkin, Daniel Gruss, Werner Haas, Mike Hamburg, Moritz Lipp, Stefan Mangard, Thomas Prescher, Michael Schwarz, and Yuval Yarom. Spectre Attacks: Exploiting Speculative Execution. In 2019 IEEE Symposium on Security and Privacy (SP), pages 1–19, 2019. ISSN: 2375-1207.</li>
+<li>Victor van der Veen, Yanick Fratantonio, Martina Lindorfer, Daniel Gruss, Clementine Maurice, Giovanni Vigna, Herbert Bos, Kaveh Razavi, and Cristiano Giuffrida. Drammer: Deterministic Rowhammer Attacks on Mobile Platforms. In Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security, CCS ’16, pages 1675–1689, New York, NY, USA, 2016. Association for Computing Machinery.</li>
+<li>Michael Schwarz, Moritz Lipp, Daniel Moghimi, Jo Van Bulck, Julian Stecklina, Thomas Prescher, and Daniel Gruss. ZombieLoad: Cross-Privilege-Boundary Data Sampling. InProceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security, CCS ’19, pages 753–768, New York, NY, USA, 2019. Association for Computing Machinery.</li>
+<li>Daniel Gruss, Clémentine Maurice, and Stefan Mangard. Rowhammer.js: A Remote Software-Induced Fault Attack in JavaScript. In Juan Caballero, Urko Zurutuza, and Ricardo J. Rodríguez, editors,Detection of Intrusions and Malware, and Vulnerability Assessment, Lecture Notes in Computer Science, pages 300–321, Cham, 2016. Springer International Publishing.</li>
+<li>Michael Schwarz, Martin Schwarzl, Moritz Lipp, Jon Masters, and Daniel Gruss. NetSpectre: Read Arbitrary Memory over Network. In Kazue Sako, Steve Schneider, and Peter Y. A. Ryan, editors, Computer Security – ESORICS 2019, Lecture Notes in Computer Science, pages 279–299, Cham, 2019. Springer International Publishing.</li>
+<li>Daniel Gruss, Raphael Spreitzer, and Stefan Mangard. Cache Template Attacks: Automating Attacks on Inclusive {Last-Level} Caches. pages 897–912, 2015.</li>
+<li>Daniel Gruss, Clémentine Maurice, Klaus Wagner, and Stefan Mangard. Flush+Flush: A Fast and Stealthy Cache Attack. In Juan Caballero, Urko Zurutuza, and Ricardo J. Rodríguez, editors, Detection of Intrusions and Malware, and Vulnerability Assessment, Lecture Notes in Computer Science, pages 279–299, Cham, 2016. Springer International Publishing.</li>
+<li>Moritz Lipp, Michael Schwarz, Daniel Gruss, Thomas Prescher, Werner Haas, Anders Fogh, Jann Horn, Stefan Mangard, Paul Kocher, Daniel Genkin, et al. Meltdown: Reading kernel memory from user space. In 27th USENIX Security Symposium (USENIX Security 18), pages 973–990, 2018.</li>
+<li>Claudio Canella, Jo Van Bulck, Michael Schwarz, Moritz Lipp, Benjamin von Berg, Philipp Ortner, Frank Piessens, Dmitry Evtyushkin, and Daniel Gruss. A Systematic Evaluation of Transient Execution Attacks and Defenses. pages 249–266, 2019.</li>
+<li>Frank Li and Vern Paxson. A Large-Scale Empirical Study of Security Patches. In Proceedings of the 2017 ACM SIGSAC Conference on Computer and Communications Security, CCS ’17, pages 2201–2215, New York, NY, USA, 2017. Association for Computing Machinery.</li>
+<li>Zakir Durumeric, David Adrian, Ariana Mirian, Michael Bailey, and J. Alex Halderman. A Search Engine Backed by Internet-Wide Scanning. In Proceedings of the 22nd ACM SIGSAC Conference on Computer and Communications Security, CCS ’15, pages 542–553, New York, NY, USA, 2015. Association for Computing Machinery.</li>
+</ol>
+
+                    </article>
+                    
+
+
+    <blockquote id="date-expire-notification" class="post-expired-notify">本文最后更新于 <span id="date-expire-num"></span> 天前，文中所描述的信息可能已发生改变</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2022-05-01");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2019-08-20T08:10:00.000Z" itemprop="datePublished">2019-08-20</time>
+
+    , 最后修改于&nbsp;<time datetime="2022-05-01T13:56:21.261Z" itemprop="dateModified">2022-05-01</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+<span class="post-categories-list mt-2">
+
+<a class="post-categories-list-item" href='/categories/PaperReview/'>PaperReview</a>
+
+</span>
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/Security/" rel="tag">#&nbsp;Security</a>
+
+<a class="post-tags-list-item" href="/tags/Research/" rel="tag">#&nbsp;Research</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2019/08/20/baidupcsgo-web-proxy/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">Baidupcs-web 在 apache2 上的反向代理配置</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2019/08/20/clash_gateway/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                        <div class="card-footer post-comment">
+                            <div id="disqus_thread"></div>
+
+<div class="btn_click_load"> 
+    <button id="disqus_click_btn" class="btn">阅读评论（请确保 disqus 可以正常加载）</button>
+</div>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://breakertt.moe/2019/08/20/sidechannel/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://breakertt.moe/2019/08/20/sidechannel/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script id="disqus-lazy-load-script">
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'https://disqus.com/next/config.json', true);
+    xhr.timeout = 4000;
+    xhr.send();
+    xhr.onload = function() {
+        if(this.status == 200||this.status == 304){
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//breakertt-moe.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+            document.getElementById('disqus_click_btn').setAttribute("style", "display:none")
+        }
+    };
+    xhr.ontimeout = function(e) {
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:block");
+    };
+    xhr.onerror = function(e) {
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:block");
+    };
+    document.getElementById('disqus_click_btn').onclick=function() { //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//breakertt-moe.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        document.getElementById('disqus_click_btn').setAttribute("style", "display:none")
+    };
+</script>
+
+                        </div>
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="https://breakertt.moe">Breakertt Blog</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+
+(function() {
+    var copyrightNow = new Date().getFullYear();
+    var copyrightContent = document.getElementById('copyright-year');
+    var copyrightSince = 2018;
+    if (copyrightSince === copyrightNow) {
+        copyrightContent.textContent = copyrightNow;
+    } else {
+        copyrightContent.textContent = copyrightSince + ' - ' + copyrightNow;
+    }
+})();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+
+
+
+<!-- Comment -->
+
+    
+        
+    
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>
