@@ -1,9 +1,11 @@
 title: 爱丁堡大学 MSc CS 硕士就读体验
-date: 2020/03/18 16:30:00
+date: 2022/05/31 16:30:00
 categories:
 - Life
 tags:
 - Univeristy
+thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200313235940.png
+toc: true
 ---
 
 在经历了高考失利和疫情动荡之后，我在 Omicron 爆发的前夜飞回了英国，开始了一年水硕的学习。
