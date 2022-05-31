@@ -4,7 +4,7 @@ categories:
 - Life
 tags:
 - Univeristy
-thumbnail: https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200313235940.png
+thumbnail: https://raw.githubusercontent.com/breakertt/blog/pic/Appleton-Tower-2021-Image.jpg
 toc: true
 ---
 
