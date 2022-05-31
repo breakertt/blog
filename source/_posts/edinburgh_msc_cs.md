@@ -34,4 +34,22 @@ Con：世界排名不如 UCL，村
 
 ## 选课
 
-开学没过多久，学校就安排了一个 Persoal Tutor。和诺丁汉的 Personal Tutor 一样，这里的 Personal Tutor 也给不了
+开学没过多久，学校就安排了一个与 Persoal Tutor 的会议，会议主要就是讨论一下选课。和诺丁汉的 Personal Tutor 一样，这里的 Personal Tutor 也给不了太多的建议，一般来说他会帮你避一些可能你会挂科的课，不过选择权还是在自己手上。
+
+### 选择大方向
+
+### 我选的课以及评价
+
+### 一些感悟
+
+## IRR-IPP-毕设之我见
+
+讲完了可以自由选择的学分之后，我想来谈谈爱丁堡 MSc CS 对以后想在科研道路有一定建树的同学准备的 80 科研学分。
+
+- Informatics Research Review (10 Credits)
+- Informatics Project Proposal (10 Credits)
+- Dissertation (60 Credits)
+
+## PhD 申请
+
+**持续更新中。。。**
