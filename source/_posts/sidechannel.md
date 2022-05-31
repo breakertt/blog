@@ -5,6 +5,7 @@ categories:
 tags:
 - Security
 - Research
+thumbnail: https://raw.githubusercontent.com/breakertt/blog/pic/meltdown-spectre-kernel-vulnerability.png
 toc: true
 ---
 
