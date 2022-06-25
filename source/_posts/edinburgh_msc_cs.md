@@ -42,6 +42,9 @@ Con：世界排名不如 UCL，村
 
 都说爱丁堡没课可以选，但是事实上爱丁堡可能已经是开计算机课最多的英国大学了。如果你是爱丁堡的 CS master，有很多大方向可以选择，详细的可以参见 handbook。这里的主要想法是，研究生阶段修课需要有一个明确的主线，而不是再是凑学分。打个比方，如果你想做并行计算相关的，PPLS (Parallel Programming and Language System) PA (Parallel Architecure) EXC (Extreme Computing) 就是很适合一起选；再打个比方，如果你想做 NLP 的话，你可以选 TTDS (Text ...) MLP (Machine Learning Pratical) ANLP (Acce.. Natural Language Processing) 这个组合。当然，这个只是对于 MSc CS 的学生，别的 MSc Cybersecurity 和 MSc AI 之类的都已经有自己的主线。
 
+## 一些碎碎念
+
+很多人说爱丁堡没啥课好选，其实这边的选课范围已经非常的宽泛和自由。即使你是 MSc CS，你也可以选上 ANLP，
 ## 课程分享 - 安全
 
 ### Blockchain & Distributed Ledgers (BDL)
@@ -118,7 +121,7 @@ Con：世界排名不如 UCL，村
 
 评分 4.5/5
 
-## IRR-IPP-毕设 / 科研向的 80 学分（包括 IRR，IPP）
+# IRR-IPP-毕设 / 科研向的 80 学分（包括 IRR，IPP）
 
 讲完了可以自由选择的学分之后，我想来谈谈爱丁堡 MSc CS 对以后想在科研道路有一定建树的同学准备的 80 科研学分。
 
