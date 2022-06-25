@@ -57,7 +57,7 @@ Con：世界排名不如 UCL，村
 
 选这门课的主要原因是我毕设和安全有关系，且我这辈子还没上过院士 + 教科书原作者开的课。这门课我这年有两个老师，一位是英国两院院士，我本科计算机安全课教科书《Security Engineering》的作者，从剑桥双聘过来的 Ross Anderson，另外一位是体系结构x安全届的学术新星 Sam Ainsworth，也是从剑桥过来的。这门课介绍了安全工程/安全研究的方方面面，Ross 负责广度（计算机安全和人社会）的部分，Sam 负责深度（计算机安全和计算机软件计算机硬件）的部分。
 
-这门课上课部分分为 Lecture 和 Tutorial，Lecture 是放在 Youtube 上的（https://www.youtube.com/channel/UCRw25HVj1Rvl2XcEHdj4PKg），Tutorial 是线下的。整体来说我觉得课程内容还是很不错的，引人入胜。老师也准备了相关的题目放在 Tut 上一起讨论，比较遗憾的是大家的参与度都不是很高的感觉。
+这门课上课部分分为 Lecture 和 Tutorial，Lecture 是[放在 Youtube 上的](https://www.youtube.com/channel/UCRw25HVj1Rvl2XcEHdj4PKg)，Tutorial 是线下的。整体来说我觉得课程内容还是很不错的，引人入胜。老师也准备了相关的题目放在 Tut 上一起讨论，比较遗憾的是大家的参与度都不是很高的感觉。
 
 这门课有两个作业，都是 Paper Review，对当时的我来说是一个小挑战，但是最后得到的分数还不错。我觉得如果你之后想做科研的话，请务必好好做这两个作业。
 
@@ -127,10 +127,16 @@ Con：世界排名不如 UCL，村
 
 这 80 学分包括了以下三个板块：
 - Informatics Research Review (10 Credits)
-    IRR 是一门教你写综述的课，我不觉得这门课安排的很好，不过无论如何给了你 10 学分的时间去学会写一篇 Literature Review。相比我女朋友的学校，把写 Review 直接放进 Dissertation，爱丁堡真的已经是在手把手带你做科研。这个 Literature Review 
+
+    IRR 是一门教你写综述的课，我不觉得这门课安排的很好，不过无论如何给了你 10 学分的时间去学会写一篇 Literature Review。相比我女朋友的学校，把写 Review 直接放进 Dissertation，爱丁堡真的已经是在手把手带你做科研。
+    这个 Literature Review 的主题是自选的，上限是 8 页，不过我建议最好写一点本校有老师在做的方向，这样可以和后期的 IPP 契合。
 - Informatics Project Proposal (10 Credits)
+
+    IPP 是 IRR 的后续和 Dissertation 的前奏。IPP 就是给自己的毕设写一份 Proposal，自己的导师会打分。我真的建议 IPP 要好好写，不然连毕设都没开始你的毕设导师已经放弃你了==
 - Dissertation (60 Credits)
 
+    这个我目前还在体验，不过因为我导师 + 我 self-propose 的原因，我在去年 12 月和今年 4 月放弃了休息，提前做了一些工作。因为每个人和导师合作的行为模式都有区别，所以我就简单讲一下 self-propose。self-propose 指的是自己提一个毕设题目，而不是等到第二学期从导师给的论文题目里面挑。self-propose 做的课题一般会更前沿，更有可能发表一些。不客气的说，有些毕设课题从题目开始没有发表论文的可能性了。
+    self-propose 很麻烦，要自己选老师自己陶瓷，如果你以后不想做科研我真的不推荐，但是如果你想，这个真的会很有帮助。
 
 
 ## PhD 申请
