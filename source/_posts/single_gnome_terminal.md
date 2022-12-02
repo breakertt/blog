@@ -1,9 +1,11 @@
-title: Keep only one Gnome-Terminal instance (Ubuntu 22.04)
+title: Keep only one Gnome-Terminal instance (Ubuntu 22.04 with Xorg)
 date: 2022/12/2 13:52:00
 categories:
 - Linux
 toc: true
 ---
+
+**Note: Unfortunately, I haven't managed a way to activate gnome-terminal window in Wayland. You can use this script in Wayland, but the terminal will not come to foreground.**
 
 1. Create a script at `~/bin/single_gnome_terminal.sh`
 
