@@ -1,4 +1,4 @@
-title: Keep only one gnome terminal window (Ubuntu 22.04)
+title: Keep only one Gnome-Terminal instance (Ubuntu 22.04)
 date: 2022/12/2 13:52:00
 categories:
 - Linux
