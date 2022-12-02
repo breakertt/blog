@@ -4,7 +4,6 @@ categories:
 - Life
 tags:
 - Univeristy
-keywords: 计算机, 计算机科学, CS, Computer Science, Master, 爱丁堡, Edinburgh
 thumbnail: https://raw.githubusercontent.com/breakertt/blog/pic/Appleton-Tower-2021-Image.jpg
 toc: true
 ---
