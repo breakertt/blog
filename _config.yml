@@ -97,7 +97,7 @@ suka_theme:
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: git@github.com:imaginebreake/imaginebreake.github.io.git
+  repository: git@github.com:breakertt/blog.git
   branch: master
 
 # Aplayer

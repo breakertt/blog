@@ -5,7 +5,9 @@ categories:
 toc: true
 ---
 
-Becuase Oracle VPS instance has a set of quite strong initial iptables rules for the safety of server, we need to open the access from these new interafaces and ports, and also, insert these rules to the top of chains.
+Oracle VPS instance has a set of quite strong initial iptables rules for the safety of server, therefore we need to open the access from these new interafaces and ports, and also, insert these rules to the top of chains.
+
+You can use follow rules in `/etc/wireguard/wg%i.conf`
 
 ```
 PostUp = iptables -I FORWARD 1 -i %i -o enp0s3 -j ACCEPT; iptables -I FORWARD 1 -i enp0s3 -o %i -j ACCEPT; iptables -I INPUT 1 -i enp0s3 -p udp --dport 51820 -j ACCEPT; iptables -I INPUT 1 -i %i -j ACCEPT; iptables -t nat -I POSTROUTING 1 -o enp0s3 -j MASQUERADE
