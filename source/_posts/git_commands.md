@@ -9,6 +9,7 @@ toc: true
   `git log -L :myfunction:path/to/myfile.c`
 - Reset the commit date to the author date from a certian commit to latest commit
   `git filter-branch -f --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"' <certian commit>..HEAD`  
-Refs:
+
+# Refs
 
 [1] https://stackoverflow.com/a/33953022
