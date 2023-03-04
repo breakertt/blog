@@ -1,5 +1,5 @@
 title: A note on tricky Git commands
-date: 2023/2/3 13:20:00
+date: 2023/3/2 13:20:00
 categories:
 - Linux
 toc: true
