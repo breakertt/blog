@@ -1,5 +1,5 @@
 title: Setting up Linux kernel development envirment on VSCode
-date: 2023/2/3 13:20:00
+date: 2023/3/4 17:17:00
 categories:
 - Linux
 toc: true
