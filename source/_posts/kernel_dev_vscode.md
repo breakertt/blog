@@ -8,5 +8,7 @@ toc: true
 Work in process
 
 # Refs
-[1] https://web.archive.org/web/20230304164538/https://www.mail-archive.com/kernelnewbies@kernelnewbies.org/msg22110.html
-[2] https://web.archive.org/web/20230304164402/https://howardlau.me/programming/debugging-linux-kernel-with-vscode-qemu.html
+[1] https://web.archive.org/web/20230304164538/https://www.mail-archive.com/kernelnewbies@kernelnewbies.org/msg22110.html \
+[2] https://web.archive.org/web/20230304164402/https://howardlau.me/programming/debugging-linux-kernel-with-vscode-qemu.html \
+[3] https://stackoverflow.com/a/71543187 \
+[4] https://lore.kernel.org/all/CAKwvOdkQTFEGaSXj5kHpuqTQ9hFYPWkCAyegQ4jienLaH5x9Ng@mail.gmail.com/t/#me025ddd2bffdd1835f5f19ba4fe657c879fb7056
