@@ -1,4 +1,4 @@
-title: Setting up Linux kernel development envirment on VSCode
+title: Setting up Linux kernel development environment on VSCode
 date: 2023/3/4 17:17:00
 categories:
 - Linux
