@@ -11,6 +11,8 @@ toc: true
   `git filter-branch -f --env-filter 'export GIT_COMMITTER_DATE="$GIT_AUTHOR_DATE"' <commit>..HEAD`  
 - Restore file from old commit
   `git checkout <commit> -- <path/to/file>`
+- Delete files and dirs that are not tracked:
+  `git clean -fd`
   
 # Refs
 
