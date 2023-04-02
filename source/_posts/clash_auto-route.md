@@ -1,5 +1,5 @@
 title: What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN?
-date: 2019/08/20 14:10:00
+date: 2023/04/02 19:39:16
 categories:
 - Linux
 tags:
