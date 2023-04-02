@@ -46,7 +46,7 @@ $ ip route list table 1970566510
 default dev utun proto unspec 
 ```
 
-Now let us exaplsin what exactly every new lines does
+Now let us exaplsin what exactly every new lines do
 
 ```
 9500:	not from all dport 53 lookup main suppress_prefixlength 0
