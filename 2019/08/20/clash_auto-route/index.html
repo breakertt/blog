@@ -47,7 +47,7 @@
     <meta name="renderer" content="webkit">
 
     <!-- Title -->
-    <title>Baidupcs-web 在 apache2 上的反向代理配置 | Breakertt Blog</title>
+    <title>What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN? | Breakertt Blog</title>
 
     <!-- Favicons -->
     <link rel="icon" type="image/ico" href="/img/favicon/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/img/favicon/apple-touch-icon.png"><link rel="icon" typt="image/png" sizes="192x192" href="/img/favicon/android-chrome-192x192.png"><link rel="icon" typt="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png"><link rel="icon" typt="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png"><link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="">
@@ -147,12 +147,12 @@
     <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Breakertt Blog"><meta name="msapplication-starturl" content="https://breakertt.moe"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Breakertt Blog"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content="Baidupcs-web 在 apache2 上的反向代理配置 | Breakertt Blog"><meta property="og:site_name" content="Breakertt Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/"><meta property="og:locale" content="zh-CN"><meta name="description" content="此处省略一万句脏话。 - Breakertt - Breakertt Blog"><meta name="keywords" content="Network, Proxy"><meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200313235940.png"><meta property="article:published_time" content="2019-08-20T08:10:00.000Z"><meta property="article:modified_time" content="2023-04-02T18:36:36.150Z"><meta property="og:updated_time" content="2023-04-02T18:36:36.150Z"><meta property="article:author" content="Breakertt"><meta property="article:tag" content="Network, Proxy"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200313235940.png">
+    <meta property="og:title" content="What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN? | Breakertt Blog"><meta property="og:site_name" content="Breakertt Blog"><meta property="og:type" content="article"><meta property="og:url" content="https://breakertt.moe/2019/08/20/clash_auto-route/"><meta property="og:locale" content="zh-CN"><meta name="description" content="Before Clash start we have following ip rules and routes  $ ip rule list0:	from all lookup local32766:	from all lookup main32767:	from all lookup default$ ip route listdefault via 192.168.122.1 dev en - Breakertt - Breakertt Blog"><meta name="keywords" content="Network, Proxy"><meta property="og:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000119.png"><meta property="article:published_time" content="2019-08-20T06:10:00.000Z"><meta property="article:modified_time" content="2023-04-02T18:36:36.150Z"><meta property="og:updated_time" content="2023-04-02T18:36:36.150Z"><meta property="article:author" content="Breakertt"><meta property="article:tag" content="Network, Proxy"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000119.png">
 
     
 
     <!-- ### Canonical link ### -->
-    <link rel="canonical" href="https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/">
+    <link rel="canonical" href="https://breakertt.moe/2019/08/20/clash_auto-route/">
 
     <meta name="generator" content="Hexo 4.2.0">
 
@@ -183,21 +183,21 @@
 <script type="application/ld+json">
 {
     "@context": "http://schema.org",
-    "url": "https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/",
+    "url": "https://breakertt.moe/2019/08/20/clash_auto-route/",
     "@type": "BlogPosting",
     "logo": "https://breakertt.moe/img/favicon/android-chrome-192x192.png",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/"
+        "@id": "https://breakertt.moe/2019/08/20/clash_auto-route/"
     },
-    "headline": "Baidupcs-web 在 apache2 上的反向代理配置 | Breakertt Blog",
+    "headline": "What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN? | Breakertt Blog",
     
     "image": {
         "@type": "ImageObject",
-        "url": "https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200313235940.png"
+        "url": "https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000119.png"
     },
     
-    "datePublished": "2019-08-20T08:10:00.000Z",
+    "datePublished": "2019-08-20T06:10:00.000Z",
     "dateModified": "2023-04-02T18:36:36.150Z",
     "author": {
         "@type": "Person",
@@ -224,7 +224,7 @@
     },
     
     "keywords": "Network, Proxy",
-    "description": "此处省略一万句脏话。 - Breakertt - Breakertt Blog"
+    "description": "Before Clash start we have following ip rules and routes  $ ip rule list0:	from all lookup local32766:	from all lookup main32767:	from all lookup default$ ip route listdefault via 192.168.122.1 dev en - Breakertt - Breakertt Blog"
 }
 </script>
 
@@ -295,14 +295,14 @@
         <!-- Share Telegram -->
         
         <li class="menu-item">
-            <a href="https://t.me/share/url?url=https://breakertt.moe&text=Baidupcs-web 在 apache2 上的反向代理配置" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+            <a href="https://t.me/share/url?url=https://breakertt.moe&text=What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN?" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
         </li>
         
 
         <!-- QRCode -->
         
         <li class="menu-item">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB1ElEQVR42u3aO5KDMBBFUfa/6ZmUQOp320WAmkviKhvQCWSpP7r+XnhdokSJErVAXcV1v2f1uXrH7j40jqgxqOWk23y/QlB4GkfULBSZrPf7dgPtJnIaR9S3ULvFkD4nStRuMUy/lQOK+hxqt1HuBtsFaqtJ/niUIOr1qCqgf/LzsWxG1KtRseiwmLTV97vE4tGqi6hXo8iCuCpUkGc6C66oOSgyaEpEO8jyPaLGoFLy+Ms9NHgsV3RRR6JSAtnZkFNCGv8MokagOgsh2airxTUuzqJGoXYvoU2jGMCFxqWoWajUNCSFe9JEimOKGoOizaLU0O40j1AyKupIVCdYI9+Td+DivqhjUVWSQCbp4wUOUUejUsBGDtjQADFu3KJGoFDRPRzsIgtku+Mg6lhUFex3g/8qOETNS1EjUOSgBJnQ6T3VJi5qHookniQpoH+KbUApahSqW+xPRftOgV/UTFRqFHUaP78c7BE1B9VpDFWJJJnsaQEVNQNFGtgkKUhNxoQVNQtFDl9ReOeeVpQg6jhUaiCmYit5Ph4iFPU5VGoA0MNf22aUqM+hSCOSFkvQhizqaFQq7leJRedZ3MUSdTSqW5jHg8BkRNQs1JsuUaJEibpd/12SUWAJyWfRAAAAAElFTkSuQmCC" alr="QRCode">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB1UlEQVR42u3bwW6DMBBFUf7/p9tNFy3C8+4gKuHJZRM1LXAqEXvm2Tm+XngcokSJEnWBOorjzwk/P5PX1fnpPqLmoC4futNNVu+dr3EFIvcRNQ91fvDSg1y9R/72/L6oz0OlB7waaEWJqi6YHn5RotBEeTEgdkCPVwmiXo+qCvonXx/rZkS9GhVDh4Ctzvu31EXUq1G0UEtNAAk0rn4nai6KPMCrG3eutQKJmo/qFm60iV0Vh6JmoUjIQcINMsC2Kk9RW6JWg2A1UZNGo0KiylPUtigSWFBECsdSoSdqFoosTqcJl3w4ygle1BhUaizTpJsG4KrhwCsOorZC0UVpErCuBt1lsyBqJCoFqGSDRPVPkeJP1BwUCcNS8EHCklXTK2omqgoxukFFwqMgVtTWqOritOhLwSxpSETNRZGgjAyYZBAVNRdFECn0IhsB26tYorZH3dnU3AnObnUzorZEdTfZdIq7VBCKmoeiGwVTUUcXHcvFclEjUGgTA2gCSAgbN3yJGoPqbgpMwX81Qbc2CoraGtXZSFPdLC1utppRUeNRcRHx6H15v5yQRX0UqtNEdD4womahSGhPgv+754mahepuLqWLQN3mQdQM1JsOUaJEifp1fANLj6EQx0z8TwAAAABJRU5ErkJggg==" alr="QRCode">
         </li>
         
 
@@ -318,14 +318,14 @@
     <div class="post-container">
     <div id="post-card" class="card">
         
-            <div class="card-image lazyload" data-bg="url('https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200313235940.png')"></div>
+            <div class="card-image lazyload" data-bg="url('https://raw.githubusercontent.com/imaginebreake/imaginebreake.github.io/pic/20200314000119.png')"></div>
         
         <div class="card-item-container">
             <div class="card-inner-cell">
                 <!-- # Post Header Info # -->
                 <div class="card-header">
                     
-    <h1 class="card-title h3 mb-2">Baidupcs-web 在 apache2 上的反向代理配置</h1>
+    <h1 class="card-title h3 mb-2">What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN?</h1>
 
 
 
@@ -352,7 +352,7 @@
     <!-- Share Twitter -->
     
     <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=Baidupcs-web 在 apache2 上的反向代理配置&url=https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN?&url=https://breakertt.moe/2019/08/20/clash_auto-route/&via=Breakertt" target="_blank" rel="external noopener noreferrer nofollow">分享到 Twitter</a>
     </li>
     
 
@@ -371,14 +371,14 @@
     <!-- Share Telegram -->
     
     <li class="menu-item">
-        <a href="https://t.me/share/url?url=https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/&text=Breakertt Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
+        <a href="https://t.me/share/url?url=https://breakertt.moe/2019/08/20/clash_auto-route/&text=Breakertt Blog" target="_blank" rel="external noopener noreferrer nofollow">分享到 Telegram</a>
     </li>
     
 
     <!-- QRCode -->
     
     <li class="menu-item">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB1ElEQVR42u3aO5KDMBBFUfa/6ZmUQOp320WAmkviKhvQCWSpP7r+XnhdokSJErVAXcV1v2f1uXrH7j40jqgxqOWk23y/QlB4GkfULBSZrPf7dgPtJnIaR9S3ULvFkD4nStRuMUy/lQOK+hxqt1HuBtsFaqtJ/niUIOr1qCqgf/LzsWxG1KtRseiwmLTV97vE4tGqi6hXo8iCuCpUkGc6C66oOSgyaEpEO8jyPaLGoFLy+Ms9NHgsV3RRR6JSAtnZkFNCGv8MokagOgsh2airxTUuzqJGoXYvoU2jGMCFxqWoWajUNCSFe9JEimOKGoOizaLU0O40j1AyKupIVCdYI9+Td+DivqhjUVWSQCbp4wUOUUejUsBGDtjQADFu3KJGoFDRPRzsIgtku+Mg6lhUFex3g/8qOETNS1EjUOSgBJnQ6T3VJi5qHookniQpoH+KbUApahSqW+xPRftOgV/UTFRqFHUaP78c7BE1B9VpDFWJJJnsaQEVNQNFGtgkKUhNxoQVNQtFDl9ReOeeVpQg6jhUaiCmYit5Ph4iFPU5VGoA0MNf22aUqM+hSCOSFkvQhizqaFQq7leJRedZ3MUSdTSqW5jHg8BkRNQs1JsuUaJEibpd/12SUWAJyWfRAAAAAElFTkSuQmCC" alt="QRCode">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAAAAABQV18IAAAB1UlEQVR42u3bwW6DMBBFUf7/p9tNFy3C8+4gKuHJZRM1LXAqEXvm2Tm+XngcokSJEnWBOorjzwk/P5PX1fnpPqLmoC4futNNVu+dr3EFIvcRNQ91fvDSg1y9R/72/L6oz0OlB7waaEWJqi6YHn5RotBEeTEgdkCPVwmiXo+qCvonXx/rZkS9GhVDh4Ctzvu31EXUq1G0UEtNAAk0rn4nai6KPMCrG3eutQKJmo/qFm60iV0Vh6JmoUjIQcINMsC2Kk9RW6JWg2A1UZNGo0KiylPUtigSWFBECsdSoSdqFoosTqcJl3w4ygle1BhUaizTpJsG4KrhwCsOorZC0UVpErCuBt1lsyBqJCoFqGSDRPVPkeJP1BwUCcNS8EHCklXTK2omqgoxukFFwqMgVtTWqOritOhLwSxpSETNRZGgjAyYZBAVNRdFECn0IhsB26tYorZH3dnU3AnObnUzorZEdTfZdIq7VBCKmoeiGwVTUUcXHcvFclEjUGgTA2gCSAgbN3yJGoPqbgpMwX81Qbc2CoraGtXZSFPdLC1utppRUeNRcRHx6H15v5yQRX0UqtNEdD4womahSGhPgv+754mahepuLqWLQN3mQdQM1JsOUaJEifp1fANLj6EQx0z8TwAAAABJRU5ErkJggg==" alt="QRCode">
     </li>
     
 
@@ -391,17 +391,27 @@
                 <div class="card-body">
                     
                     <article id="post-content">
-                        <p>此处省略一万句脏话。</p>
-<a id="more"></a>
-<p>最近被安利了一个webui版本的baidupcs-go，叫做BiaduPCS-Web，据说不错我就也来用用。</p>
-<p>安装很容易，使用了GitHub上的一键脚本：<a href="https://github.com/user1121114685/baidupcsweb" target="_blank" rel="noopener">https://github.com/user1121114685/baidupcsweb</a></p>
-<p>但是服务起来之后用的是5299端口，不太优雅对吧？那我就想着做个反代好了，也就是本文的重点了。</p>
-<p>一开始我是想配一个类似于”<a href="http://server/pan/&quot;" target="_blank" rel="noopener">http://server/pan/&quot;</a>, 这样的子目录的反向代理的，但是这个软件不支持baseURL的配置以及路径都是写死的，那就只能单开一个域名给这个软件了。如果您使用的http服务器是nginx请看这里：<a href="https://github.com/liuzhuoling2011/baidupcs-web/issues/20" target="_blank" rel="noopener">请问如何用nginx进行反向代理</a>，caddy我也不太清楚，反正这篇文章讲的只有apache的。</p>
-<p>这个软件有部分链接用的不是http，而是websocket，这就是问题所在了，查了不少资料，我们需要先开启用几个插件：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">a2enmod proxy</span><br><span class="line">a2enmod proxy_http</span><br><span class="line">a2enmod rewrite</span><br><span class="line">sudo systemctl restart apache2</span><br></pre></td></tr></table></figure>
-<p>然后添加如下的新站点，只开了443的，80请自己改，内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;VirtualHost *:443&gt;</span><br><span class="line">    ServerName pan.abc.com ######</span><br><span class="line"></span><br><span class="line">    SSLCertificateFile  &#x2F;etc&#x2F;apache2&#x2F;ssl&#x2F;pan&#x2F;cert.pem ######</span><br><span class="line">    SSLCertificateKeyFile &#x2F;etc&#x2F;apache2&#x2F;ssl&#x2F;pan&#x2F;key.pem ######</span><br><span class="line">    SSLCertificateChainFile &#x2F;etc&#x2F;apache2&#x2F;ssl&#x2F;pan&#x2F;chain.pem ######</span><br><span class="line"></span><br><span class="line">    SSLEngine on</span><br><span class="line"></span><br><span class="line">    ProxyPreserveHost On</span><br><span class="line">    ProxyRequests Off</span><br><span class="line">    RewriteEngine On</span><br><span class="line"></span><br><span class="line">    RewriteCond %&#123;HTTP:Upgrade&#125; &#x3D; websocket [NC]</span><br><span class="line">    RewriteCond %&#123;HTTP:CONNECTION&#125; ^Upgrade$ [NC]</span><br><span class="line">    RewriteRule &#x2F;ws(.*)           ws:&#x2F;&#x2F;localhost:5299&#x2F;ws$1 [P,L]</span><br><span class="line">    RequestHeader set X-Forwarded-Proto &quot;https&quot;</span><br><span class="line"></span><br><span class="line">    &lt;Location &#x2F;ws&gt;</span><br><span class="line">        Require all granted</span><br><span class="line">        ProxyPassReverse ws:&#x2F;&#x2F;127.0.0.1:5299&#x2F;ws</span><br><span class="line">    &lt;&#x2F;Location&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Location &#x2F;&gt;</span><br><span class="line">        Require all granted</span><br><span class="line">        ProxyPass http:&#x2F;&#x2F;localhost:5299&#x2F;</span><br><span class="line">        ProxyPassReverse &#x2F;</span><br><span class="line">    &lt;&#x2F;Location&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;VirtualHost&gt;</span><br></pre></td></tr></table></figure>
-<p>简单讲一下，这边把当http请求需要升级为ws请求时，把反代的头改成了ws，然后就可以成功访问了。</p>
+                        <a id="more"></a>
+<p>Before Clash start we have following ip rules and routes </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ip rule list</span><br><span class="line">0:	from all lookup local</span><br><span class="line">32766:	from all lookup main</span><br><span class="line">32767:	from all lookup default</span><br><span class="line"></span><br><span class="line">$ ip route list</span><br><span class="line">default via 192.168.122.1 dev enp1s0 proto dhcp src 192.168.122.41 metric 100 </span><br><span class="line">192.168.122.0&#x2F;24 dev enp1s0 proto kernel scope link src 192.168.122.41 metric 100 </span><br><span class="line">192.168.122.1 dev enp1s0 proto dhcp scope link src 192.168.122.41 metric 100</span><br></pre></td></tr></table></figure>
+<p>After Clash start we have following ip rules and routes</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ip rule list</span><br><span class="line">0:	from all lookup local</span><br><span class="line">9500:	not from all dport 53 lookup main suppress_prefixlength 0</span><br><span class="line">9510:	not from all iif lo lookup 1970566510</span><br><span class="line">9520:	from 0.0.0.0 iif lo uidrange 0-4294967294 lookup 1970566510</span><br><span class="line">9530:	from 198.18.0.1 iif lo uidrange 0-4294967294 lookup 1970566510</span><br><span class="line">32766:	from all lookup main</span><br><span class="line">32767:	from all lookup default</span><br><span class="line"></span><br><span class="line">$ ip route list # table main</span><br><span class="line">default via 192.168.122.1 dev enp1s0 proto dhcp src 192.168.122.41 metric 100 </span><br><span class="line">192.168.122.0&#x2F;24 dev enp1s0 proto kernel scope link src 192.168.122.41 metric 100 </span><br><span class="line">192.168.122.1 dev enp1s0 proto dhcp scope link src 192.168.122.41 metric 100 </span><br><span class="line">198.18.0.0&#x2F;16 dev utun proto kernel scope link src 198.18.0.1</span><br><span class="line"></span><br><span class="line">$ ip route list table 1970566510</span><br><span class="line">default dev utun proto unspec</span><br></pre></td></tr></table></figure>
+<p>Now let us exaplsin what exactly every new lines does</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">9500:	not from all dport 53 lookup main suppress_prefixlength 0</span><br></pre></td></tr></table></figure>
+<p>This rules means sending all non-DNS query packets are sent to lookup the <code>main</code> table, but the default rule in the <code>main</code> table is ignored due to <code>suppress_prefixlength 0</code>. <code>suppress_prefixlength 0</code> means ignore rules matches more than prefixlength bits. Here we have 0 so it just ignore 0.0.0.0/0. The point of this rule is 1. allowing we can communicate to other machines under same LAN without clash; 2. send the packets with fake-ip addresses to TUN interface. However, we still need to hijack for example the gateway’s DNS (192.168.122.1:53 in this case), so it is only for non-DNS query packets.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">9510:	not from all iif lo lookup 1970566510</span><br></pre></td></tr></table></figure>
+<p><code>iif lo</code> means input interface <code>lo</code>, this is a way of specifying rules for locally generated packets that have a specific source address. This rules filter out packets from other machines under same LAN which is being forwarded in the chains, here the machine running Clash acts as proxy-gateway, are send to the TUN interface With this rule, packtes don’t have fake-ip range destinations are also transmitted to Clash in case DNS hijack not working.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">9520:	from 0.0.0.0 iif lo uidrange 0-4294967294 lookup 1970566510</span><br></pre></td></tr></table></figure>
+<p><code>from 0.0.0.0 iif lo</code> means packets without source addresses and generated locally. In Linux, client-initiaed packets source address can not be decided before it reaches to the interface. This rule ensures the machine running Clash itself can be proxied.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">9530:	from 198.18.0.1 iif lo uidrange 0-4294967294 lookup 1970566510</span><br></pre></td></tr></table></figure>
+<p>I am not 100% sure about this rule. This is my guess: when the Clash responses to proxied program, it will send a packet with src_addr 198.18.0.1 first, then catch this packet and modify the src_addr to the correct mapping. Please correct me if you have better idea.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">198.18.0.0&#x2F;16 dev utun proto kernel scope link src 198.18.0.1</span><br></pre></td></tr></table></figure>
+<p>Send fake-ip range packets to TUN interface</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">default dev utun proto unspec</span><br></pre></td></tr></table></figure>
+<p>A standalone ip table which sends all packet to TUN interface once looked up by. We already see it for several times.</p>
+<h1 id="One-more-thing"><a href="#One-more-thing" class="headerlink" title="One more thing"></a>One more thing</h1><p>After we understand everything, we can try to disable the transparent proxy of the machine running Clash. Can you think up how to do that?</p>
+<p>Answer:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo ip rule del from 0.0.0.0 iif lo uidrange 0-4294967294 lookup 1970566510</span><br></pre></td></tr></table></figure></p>
+<h1 id="Refs"><a href="#Refs" class="headerlink" title="Refs"></a>Refs</h1><p>[1] <a href="https://utcc.utoronto.ca/~cks/space/blog/linux/IsolatedInterfacesPrinciples" target="_blank" rel="noopener">https://utcc.utoronto.ca/~cks/space/blog/linux/IsolatedInterfacesPrinciples</a></p>
 
                     </article>
                     
@@ -424,7 +434,7 @@
     </script>
 
 
-<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2019-08-20T08:10:00.000Z" itemprop="datePublished">2019-08-20</time>
+<p class="post-footer-info mb-0 pt-0">本文发表于&nbsp;<time datetime="2019-08-20T06:10:00.000Z" itemprop="datePublished">2019-08-20</time>
 
     , 最后修改于&nbsp;<time datetime="2023-04-02T18:36:36.150Z" itemprop="dateModified">2023-04-03</time>
 
@@ -456,9 +466,9 @@
     <!-- Prev Nav -->
     
         <li class="page-item page-prev">
-            <a href="/2020/03/14/hev6_wireguard/" rel="prev">
+            <a href="/2019/08/20/baidupcsgo_web_proxy/" rel="prev">
                 <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">使用 VPS 把 HE IPv6 地址 WireGuard 分配给 Windows 客户端使用</div>
+                <div class="page-item-subtitle">Baidupcs-web 在 apache2 上的反向代理配置</div>
             </a>
         </li>
     
@@ -466,9 +476,9 @@
     <!-- Next Nav -->
     
         <li class="page-item page-next">
-            <a href="/2019/08/20/clash_auto-route/" rel="next">
+            <a href="/2019/08/20/clash_gateway/" rel="next">
                 <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">What modifications Clash made on ip route and ip rule to enable transparent proxy on TUN?</div>
+                <div class="page-item-subtitle">在 Ubuntu18.04 上使用 clash 部署旁路代理网关（透明代理）</div>
             </a>
         </li>
     
@@ -487,8 +497,8 @@
 
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'https://breakertt.moe/2019/08/20/baidupcsgo_web_proxy/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'https://breakertt.moe/2019/08/20/clash_auto-route/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'https://breakertt.moe/2019/08/20/clash_auto-route/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 </script>
 
